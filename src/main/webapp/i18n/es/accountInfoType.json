@@ -1,0 +1,25 @@
+{
+  "personalAccountingApp": {
+    "accountInfoType": {
+      "home": {
+        "title": "Account Info Types",
+        "createLabel": "Crear nuevo Account Info Type",
+        "createOrEditLabel": "Crear o editar Account Info Type",
+        "notFound": "Ningún Account Info Types encontrado"
+      },
+      "created": "Un nuevo Account Info Type ha sido creado con el identificador {{ param }}",
+      "updated": "Un Account Info Type ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Account Info Type ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Account Info Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Account Info Type"
+      },
+      "name": "Name",
+      "userId": "User Id",
+      "cron": "Cron",
+      "isOneTime": "Is One Time"
+    }
+  }
+}

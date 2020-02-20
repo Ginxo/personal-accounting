@@ -1,0 +1,73 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="personalAccountingApp.accountInfo.home.title">Account Infos</span>
+
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-account-info-personal-accounting" [routerLink]="['/account-info-personal-accounting/new']">
+            <fa-icon icon="plus"></fa-icon>
+            <span  jhiTranslate="personalAccountingApp.accountInfo.home.createLabel">
+            Create a new Account Info
+            </span>
+        </button>
+    </h2>
+
+    <jhi-alert-error></jhi-alert-error>
+
+    <jhi-alert></jhi-alert>
+
+    <div class="alert alert-warning" id="no-result" *ngIf="accountInfos?.length === 0">
+        <span jhiTranslate="personalAccountingApp.accountInfo.home.notFound">No accountInfos found</span>
+    </div>
+
+    <div class="table-responsive" id="entities" *ngIf="accountInfos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="concept"><span jhiTranslate="personalAccountingApp.accountInfo.concept">Concept</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="userId"><span jhiTranslate="personalAccountingApp.accountInfo.userId">User Id</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="startingDate"><span jhiTranslate="personalAccountingApp.accountInfo.startingDate">Starting Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="endingDate"><span jhiTranslate="personalAccountingApp.accountInfo.endingDate">Ending Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="typeId"><span jhiTranslate="personalAccountingApp.accountInfo.type">Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
+                <tr *ngFor="let accountInfo of accountInfos ;trackBy: trackId">
+                    <td><a [routerLink]="['/account-info-personal-accounting', accountInfo.id, 'view']">{{ accountInfo.id }}</a></td>
+                    <td>{{ accountInfo.concept }}</td>
+                    <td>{{ accountInfo.userId }}</td>
+                    <td>{{ accountInfo.startingDate | date:'mediumDate' }}</td>
+                    <td>{{ accountInfo.endingDate | date:'mediumDate' }}</td>
+                    <td>
+                        <div *ngIf="accountInfo.typeId">
+                            <a [routerLink]="['/account-info-type-personal-accounting', accountInfo.typeId , 'view']" >{{ accountInfo.typeId }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/account-info-personal-accounting', accountInfo.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/account-info-personal-accounting', accountInfo.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(accountInfo)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
