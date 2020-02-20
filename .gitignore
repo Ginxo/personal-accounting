@@ -25,3 +25,7 @@ node_modules/
 /.idea/
 /node/
 /target/
+/.settings/
+/.classpath
+/.factorypath
+/.project
