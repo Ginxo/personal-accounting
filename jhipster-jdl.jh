@@ -1,0 +1,33 @@
+entity Account {
+	concept String required,
+    userId Long required,
+    startingDate LocalDate required,
+    endingDate LocalDate
+}
+
+entity AccountType {
+	name String required,
+    userId Long required,
+    cron String,
+    isOneTime Boolean
+}
+
+relationship ManyToOne {
+  Account{type required} to AccountType
+}
+
+
+// Set pagination options
+paginate Account, AccountType with infinite-scroll
+
+// Set filter options
+filter Account, AccountType
+
+// Use Data Transfert Objects (DTO)
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+
+// Set an angular suffix
+angularSuffix * with personalAccounting
