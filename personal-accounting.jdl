@@ -1,11 +1,11 @@
-entity Account {
+entity AccountInfo {
 	concept String required,
     userId Long required,
     startingDate LocalDate required,
     endingDate LocalDate
 }
 
-entity AccountType {
+entity AccountInfoType {
 	name String required,
     userId Long required,
     cron String,
@@ -13,15 +13,15 @@ entity AccountType {
 }
 
 relationship ManyToOne {
-  Account{type required} to AccountType
+  AccountInfo{type required} to AccountInfoType
 }
 
 
 // Set pagination options
-paginate Account, AccountType with infinite-scroll
+paginate AccountInfo, AccountInfoType with infinite-scroll
 
 // Set filter options
-filter Account, AccountType
+filter AccountInfo, AccountInfoType
 
 // Use Data Transfert Objects (DTO)
 dto * with mapstruct

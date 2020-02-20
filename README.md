@@ -28,6 +28,10 @@ Add the `help` flag on any command to see how you can use it. For example, `npm 
 
 The `npm run` command will list all of the scripts available to run for this project.
 
+## Import JDL
+
+jhipster import-jdl ./jhipster-jdl.jh
+
 ### PWA Support
 
 JHipster ships with PWA (Progressive Web App) support, and it's turned off by default. One of the main components of a PWA is a service worker.
@@ -175,23 +179,4 @@ For more information refer to [Using Docker and Docker-Compose][], this page als
 
 ## Continuous Integration (optional)
 
-To configure CI for your project, run the ci-cd sub-generator (`jhipster ci-cd`), this will let you generate configuration files for a number of Continuous Integration systems. Consult the [Setting up Continuous Integration][] page for more information.
-
-[jhipster homepage and latest documentation]: https://www.jhipster.tech
-[jhipster 6.7.1 archive]: https://www.jhipster.tech/documentation-archive/v6.7.1
-[using jhipster in development]: https://www.jhipster.tech/documentation-archive/v6.7.1/development/
-[using docker and docker-compose]: https://www.jhipster.tech/documentation-archive/v6.7.1/docker-compose
-[using jhipster in production]: https://www.jhipster.tech/documentation-archive/v6.7.1/production/
-[running tests page]: https://www.jhipster.tech/documentation-archive/v6.7.1/running-tests/
-[code quality page]: https://www.jhipster.tech/documentation-archive/v6.7.1/code-quality/
-[setting up continuous integration]: https://www.jhipster.tech/documentation-archive/v6.7.1/setting-up-ci/
-[node.js]: https://nodejs.org/
-[yarn]: https://yarnpkg.org/
-[webpack]: https://webpack.github.io/
-[angular cli]: https://cli.angular.io/
-[browsersync]: https://www.browsersync.io/
-[jest]: https://facebook.github.io/jest/
-[jasmine]: https://jasmine.github.io/2.0/introduction.html
-[protractor]: https://angular.github.io/protractor/
-[leaflet]: https://leafletjs.com/
-[definitelytyped]: https://definitelytyped.org/
+Install heroku `curl https://cli-assets.heroku.com/install.sh | sh`
