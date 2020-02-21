@@ -1,0 +1,29 @@
+{
+  "personalAccountingApp": {
+    "forecast": {
+      "home": {
+        "title": "Previsiones",
+        "createLabel": "Crear nueva Previsión",
+        "createOrEditLabel": "Crear o editar Previsión",
+        "notFound": "Ninguna Previsión encontrada"
+      },
+      "created": "Una nueva Previsión ha sido creado con el identificador {{ param }}",
+      "updated": "Una Previsión ha sido actualizada con el identificador {{ param }}",
+      "deleted": "Una Previsión ha sido eliminada con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Previsión {{ id }}?"
+      },
+      "detail": {
+        "title": "Previsión"
+      },
+      "name": "Nombre",
+      "date": "Fecha",
+      "amount": "Cantidad",
+      "totalAmount": "Cantidad Total",
+      "amountDifference": "Diferencia",
+      "amountType": "Tipo de Cantidad",
+      "colour": "Color",
+      "icon": "Icono"
+    }
+  }
+}

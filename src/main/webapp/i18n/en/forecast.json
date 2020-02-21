@@ -1,0 +1,29 @@
+{
+  "personalAccountingApp": {
+    "forecast": {
+      "home": {
+        "title": "Forecasts",
+        "createLabel": "Create a new Forecast",
+        "createOrEditLabel": "Create or edit a Forecast",
+        "notFound": "No Forecasts found"
+      },
+      "created": "A new Forecast is created with identifier {{ param }}",
+      "updated": "A Forecast is updated with identifier {{ param }}",
+      "deleted": "A Forecast is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Forecast {{ id }}?"
+      },
+      "detail": {
+        "title": "Forecast"
+      },
+      "name": "Name",
+      "date": "Date",
+      "amount": "Amount",
+      "amountDifference": "Amount Difference",
+      "totalAmount": "Total Amount",
+      "amountType": "Amount Type",
+      "colour": "Colour",
+      "icon": "Icon"
+    }
+  }
+}

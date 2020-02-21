@@ -1,0 +1,39 @@
+<div *ngIf="forecasts$ | async ; let forecasts">
+  <table class="table table-striped" aria-describedby="page-heading">
+    <thead>
+      <tr>
+        <th scope="col"><span jhiTranslate="personalAccountingApp.eventInfo.name">Name</span>
+        </th>
+        <th scope="col"><span jhiTranslate="personalAccountingApp.forecast.date">Date</span>
+        </th>
+        <th scope="col"><span jhiTranslate="personalAccountingApp.forecast.amount">Amount</span>
+        </th>
+        <th scope="col"><span jhiTranslate="personalAccountingApp.eventInfo.amountType">Amount
+            Type</span>
+        </th>
+        <th scope="col"><span jhiTranslate="personalAccountingApp.forecast.totalAmount">Total
+            Amount</span>
+        </th>
+        <th scope="col"><span jhiTranslate="personalAccountingApp.forecast.amountDifference">Amount Difference</span>
+        </th>
+        <th scope="col"><span jhiTranslate="personalAccountingApp.forecast.colour">Colour</span>
+        </th>
+        <th scope="col"><span jhiTranslate="personalAccountingApp.forecast.icon">Icon</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let forecast of forecasts;">
+        <td>{{ forecast.name }}</td>
+        <td>{{ forecast.date | date:'mediumDate' }}</td>
+        <td>{{ forecast.amount | currency:'EUR':'symbol' }}</td>
+        <td jhiTranslate="{{ 'personalAccountingApp.AmountType.' + forecast.eventInfo.amountType }}">{{ forecast.amountType }}
+        </td>
+        <td>{{ forecast.totalAmount | currency:'EUR':'symbol' }}</td>
+        <td>{{ forecast.amountDifference | currency:'EUR':'symbol' }}</td>
+        <td>{{ forecast.eventInfo.colour }}</td>
+        <td>{{ forecast.icon }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

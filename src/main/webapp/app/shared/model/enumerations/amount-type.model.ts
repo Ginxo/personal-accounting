@@ -1,4 +1,4 @@
 export const enum AmountType {
-  SUM,
-  FIX
+  SUM = 'SUM',
+  FIX = 'FIX'
 }
