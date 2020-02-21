@@ -1,0 +1,30 @@
+{
+  "personalAccountingApp": {
+    "eventInfo": {
+      "home": {
+        "title": "Event Infos",
+        "createLabel": "Create a new Event Info",
+        "createOrEditLabel": "Create or edit a Event Info",
+        "notFound": "No Event Infos found"
+      },
+      "created": "A new Event Info is created with identifier {{ param }}",
+      "updated": "A Event Info is updated with identifier {{ param }}",
+      "deleted": "A Event Info is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Event Info {{ id }}?"
+      },
+      "detail": {
+        "title": "Event Info"
+      },
+      "name": "Name",
+      "startDate": "Start Date",
+      "endDate": "End Date",
+      "amount": "Amount",
+      "amountType": "Amount Type",
+      "iterateInformation": "Iterate Information",
+      "colour": "Colour",
+      "calendar": "Calendar",
+      "type": "Type"
+    }
+  }
+}

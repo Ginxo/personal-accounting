@@ -10,6 +10,9 @@
         "reports": "Reports",
         "accountInfoPersonalAccounting": "Account Info",
         "accountInfoTypePersonalAccounting": "Account Info Type",
+        "calendar": "Calendar",
+        "eventInfo": "Event Info",
+        "eventInfoType": "Event Info Type",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

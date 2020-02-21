@@ -1,0 +1,24 @@
+{
+  "personalAccountingApp": {
+    "eventInfoType": {
+      "home": {
+        "title": "Event Info Types",
+        "createLabel": "Crear nuevo Event Info Type",
+        "createOrEditLabel": "Crear o editar Event Info Type",
+        "notFound": "Ningún Event Info Types encontrado"
+      },
+      "created": "Un nuevo Event Info Type ha sido creado con el identificador {{ param }}",
+      "updated": "Un Event Info Type ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Event Info Type ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Event Info Type {{ id }}?"
+      },
+      "detail": {
+        "title": "Event Info Type"
+      },
+      "name": "Name",
+      "icon": "Icon",
+      "user": "User"
+    }
+  }
+}

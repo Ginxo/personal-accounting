@@ -1,0 +1,69 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="eventInfo">
+            <h2><span jhiTranslate="personalAccountingApp.eventInfo.detail.title">Event Info</span> {{ eventInfo.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="personalAccountingApp.eventInfo.name">Name</span></dt>
+                <dd>
+                    <span>{{ eventInfo.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="personalAccountingApp.eventInfo.startDate">Start Date</span></dt>
+                <dd>
+                    <span>{{ eventInfo.startDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="personalAccountingApp.eventInfo.endDate">End Date</span></dt>
+                <dd>
+                    <span>{{ eventInfo.endDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="personalAccountingApp.eventInfo.amount">Amount</span></dt>
+                <dd>
+                    <span>{{ eventInfo.amount }}</span>
+                </dd>
+                <dt><span jhiTranslate="personalAccountingApp.eventInfo.amountType">Amount Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'personalAccountingApp.AmountType.' + eventInfo.amountType }}">{{ eventInfo.amountType }}</span>
+                </dd>
+                <dt><span jhiTranslate="personalAccountingApp.eventInfo.iterateInformation">Iterate Information</span></dt>
+                <dd>
+                    <div *ngIf="eventInfo.iterateInformation">
+                        <a (click)="openFile(eventInfo.iterateInformationContentType!, eventInfo.iterateInformation)" jhiTranslate="entity.action.open">open</a>
+                        {{ eventInfo.iterateInformationContentType }}, {{ byteSize(eventInfo.iterateInformation) }}
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="personalAccountingApp.eventInfo.colour">Colour</span></dt>
+                <dd>
+                    <span>{{ eventInfo.colour }}</span>
+                </dd>
+                <dt><span jhiTranslate="personalAccountingApp.eventInfo.calendar">Calendar</span></dt>
+                <dd>
+                    <div *ngIf="eventInfo.calendarId">
+                        <a [routerLink]="['/calendar', eventInfo.calendarId, 'view']">{{ eventInfo.calendarId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="personalAccountingApp.eventInfo.type">Type</span></dt>
+                <dd>
+                    <div *ngIf="eventInfo.typeId">
+                        <a [routerLink]="['/event-info-type', eventInfo.typeId, 'view']">{{ eventInfo.typeId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/event-info', eventInfo.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

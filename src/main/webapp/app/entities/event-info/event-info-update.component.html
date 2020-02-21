@@ -1,0 +1,159 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-event-info-heading" jhiTranslate="personalAccountingApp.eventInfo.home.createOrEditLabel">Create or edit a Event Info</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="personalAccountingApp.eventInfo.name" for="field_name">Name</label>
+                    <input type="text" class="form-control" name="name" id="field_name"
+                           formControlName="name"/>
+                    <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="personalAccountingApp.eventInfo.startDate" for="field_startDate">Start Date</label>
+                    <div class="input-group">
+                        <input id="field_startDate" type="text" class="form-control" name="startDate" ngbDatepicker #startDateDp="ngbDatepicker" formControlName="startDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('startDate')!.invalid && (editForm.get('startDate')!.dirty || editForm.get('startDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('startDate')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="personalAccountingApp.eventInfo.endDate" for="field_endDate">End Date</label>
+                    <div class="input-group">
+                        <input id="field_endDate" type="text" class="form-control" name="endDate" ngbDatepicker #endDateDp="ngbDatepicker" formControlName="endDate"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="endDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+                        </span>
+                    </div>
+                    <div *ngIf="editForm.get('endDate')!.invalid && (editForm.get('endDate')!.dirty || editForm.get('endDate')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('endDate')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="personalAccountingApp.eventInfo.amount" for="field_amount">Amount</label>
+                    <input type="number" class="form-control" name="amount" id="field_amount"
+                           formControlName="amount"/>
+                    <div *ngIf="editForm.get('amount')!.invalid && (editForm.get('amount')!.dirty || editForm.get('amount')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('amount')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('amount')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="personalAccountingApp.eventInfo.amountType" for="field_amountType">Amount Type</label>
+                    <select class="form-control" name="amountType" formControlName="amountType" id="field_amountType">
+                        <option value="SUM">{{ 'personalAccountingApp.AmountType.SUM' | translate }}</option>
+                        <option value="FIX">{{ 'personalAccountingApp.AmountType.FIX' | translate }}</option>
+                    </select>
+                    <div *ngIf="editForm.get('amountType')!.invalid && (editForm.get('amountType')!.dirty || editForm.get('amountType')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('amountType')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="personalAccountingApp.eventInfo.iterateInformation" for="field_iterateInformation">Iterate Information</label>
+                    <div>
+                        <div *ngIf="editForm.get('iterateInformation')!.value" class="form-text text-danger clearfix">
+                            <a class="pull-left" (click)="openFile(editForm.get('iterateInformationContentType')!.value, editForm.get('iterateInformation')!.value)" jhiTranslate="entity.action.open">open</a><br>
+                            <span class="pull-left">{{ editForm.get('iterateInformationContentType')!.value }}, {{ byteSize(editForm.get('iterateInformation')!.value) }}</span>
+                            <button type="button" (click)="editForm.patchValue({iterateInformation: null});editForm.patchValue({iterateInformationContentType: null});"
+                                    class="btn btn-secondary btn-xs pull-right">
+                                <fa-icon icon="times"></fa-icon>
+                            </button>
+                        </div>
+                        <input type="file" id="file_iterateInformation" (change)="setFileData($event, 'iterateInformation', false)" jhiTranslate="entity.action.addblob"/>
+                    </div>
+                    <input type="hidden" class="form-control" name="iterateInformation" id="field_iterateInformation"
+                           formControlName="iterateInformation"/>
+                    <input type="hidden" class="form-control" name="iterateInformationContentType" id="field_iterateInformationContentType"
+                           formControlName="iterateInformationContentType" />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="personalAccountingApp.eventInfo.colour" for="field_colour">Colour</label>
+                    <input type="text" class="form-control" name="colour" id="field_colour"
+                           formControlName="colour"/>
+                    <div *ngIf="editForm.get('colour')!.invalid && (editForm.get('colour')!.dirty || editForm.get('colour')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('colour')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="personalAccountingApp.eventInfo.calendar" for="field_calendar">Calendar</label>
+                    <select class="form-control" id="field_calendar" name="calendar" formControlName="calendarId">
+                        <option *ngIf="!editForm.get('calendarId')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="calendarOption.id" *ngFor="let calendarOption of calendars; trackBy: trackById">{{ calendarOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('calendarId')!.invalid && (editForm.get('calendarId')!.dirty || editForm.get('calendarId')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('calendarId')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="personalAccountingApp.eventInfo.type" for="field_type">Type</label>
+                    <select class="form-control" id="field_type" name="type" formControlName="typeId">
+                        <option *ngIf="!editForm.get('typeId')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="eventInfoTypeOption.id" *ngFor="let eventInfoTypeOption of eventinfotypes; trackBy: trackById">{{ eventInfoTypeOption.id }}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('typeId')!.invalid && (editForm.get('typeId')!.dirty || editForm.get('typeId')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('typeId')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

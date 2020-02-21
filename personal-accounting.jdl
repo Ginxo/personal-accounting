@@ -1,27 +1,52 @@
-entity AccountInfo {
-	concept String required,
-    userId Long required,
-    startingDate LocalDate required,
-    endingDate LocalDate
+enum AmountType {
+  SUM,
+  FIX
 }
 
-entity AccountInfoType {
+entity Calendar {
 	name String required,
-    userId Long required,
-    cron String,
-    isOneTime Boolean
+    colour String required,
+    description String,
+    timeZone String required,
+    enabled Boolean required
+}
+
+entity EventInfo {
+	name String required,
+    startDate LocalDate required,
+    endDate LocalDate required,
+    amount BigDecimal required,
+    amountType AmountType required,
+    iterateInformation Blob,
+    colour String required
+}
+
+entity EventInfoType {
+	name String required,
+    icon String required
 }
 
 relationship ManyToOne {
-  AccountInfo{type required} to AccountInfoType
+  Calendar{user required} to User
 }
 
+relationship ManyToOne {
+  EventInfo{calendar required} to Calendar
+}
+
+relationship ManyToOne {
+  EventInfo{type required} to EventInfoType
+}
+
+relationship ManyToOne {
+  EventInfoType{user required} to User
+}
 
 // Set pagination options
-paginate AccountInfo, AccountInfoType with infinite-scroll
+paginate * with infinite-scroll
 
 // Set filter options
-filter AccountInfo, AccountInfoType
+filter *
 
 // Use Data Transfert Objects (DTO)
 dto * with mapstruct
@@ -30,4 +55,4 @@ dto * with mapstruct
 service all with serviceImpl
 
 // Set an angular suffix
-angularSuffix * with personalAccounting
+// angularSuffix * with personalAccounting

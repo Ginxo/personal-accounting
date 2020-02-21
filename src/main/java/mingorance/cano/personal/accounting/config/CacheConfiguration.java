@@ -42,6 +42,9 @@ public class CacheConfiguration {
             createCache(cm, mingorance.cano.personal.accounting.domain.User.class.getName());
             createCache(cm, mingorance.cano.personal.accounting.domain.Authority.class.getName());
             createCache(cm, mingorance.cano.personal.accounting.domain.User.class.getName() + ".authorities");
+            createCache(cm, mingorance.cano.personal.accounting.domain.Calendar.class.getName());
+            createCache(cm, mingorance.cano.personal.accounting.domain.EventInfo.class.getName());
+            createCache(cm, mingorance.cano.personal.accounting.domain.EventInfoType.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }
