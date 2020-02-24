@@ -51,16 +51,14 @@ export class EventInfoService {
 
   protected convertDateFromClient(eventInfo: IEventInfo): IEventInfo {
     const copy: IEventInfo = Object.assign({}, eventInfo, {
-      startDate: eventInfo.startDate && eventInfo.startDate.isValid() ? eventInfo.startDate.format(DATE_FORMAT) : undefined,
-      endDate: eventInfo.endDate && eventInfo.endDate.isValid() ? eventInfo.endDate.format(DATE_FORMAT) : undefined
+      date: eventInfo.date && eventInfo.date.isValid() ? eventInfo.date.format(DATE_FORMAT) : undefined
     });
     return copy;
   }
 
   protected convertDateFromServer(res: EntityResponseType): EntityResponseType {
     if (res.body) {
-      res.body.startDate = res.body.startDate ? moment(res.body.startDate) : undefined;
-      res.body.endDate = res.body.endDate ? moment(res.body.endDate) : undefined;
+      res.body.date = res.body.date ? moment(res.body.date) : undefined;
     }
     return res;
   }
@@ -68,8 +66,7 @@ export class EventInfoService {
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
       res.body.forEach((eventInfo: IEventInfo) => {
-        eventInfo.startDate = eventInfo.startDate ? moment(eventInfo.startDate) : undefined;
-        eventInfo.endDate = eventInfo.endDate ? moment(eventInfo.endDate) : undefined;
+        eventInfo.date = eventInfo.date ? moment(eventInfo.date) : undefined;
       });
     }
     return res;

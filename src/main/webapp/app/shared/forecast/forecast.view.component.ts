@@ -50,7 +50,7 @@ export class ForecastViewComponent implements OnInit {
 
   private generateForecast(events: IEventInfo[]): IForecastInfo[] {
     const sortedEvents = events.sort((a, b) => {
-      return a.startDate !== undefined && b.startDate !== undefined ? Number(a.startDate.toDate()) - Number(b.startDate.toDate()) : 0;
+      return a.date !== undefined && b.date !== undefined ? Number(a.date.toDate()) - Number(b.date.toDate()) : 0;
     });
 
     let totalAmount = 0;
@@ -71,7 +71,7 @@ export class ForecastViewComponent implements OnInit {
     foreCastInfo.totalAmount = newTotalAmount;
     foreCastInfo.amountDifference = newTotalAmount - totalAmount;
     foreCastInfo.colour = event.colour;
-    foreCastInfo.date = event.startDate;
+    foreCastInfo.date = event.date;
     foreCastInfo.icon = ''; // TODO:
     foreCastInfo.eventInfo = event;
     return foreCastInfo;

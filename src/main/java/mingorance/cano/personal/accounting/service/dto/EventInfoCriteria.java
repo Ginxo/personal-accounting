@@ -49,9 +49,7 @@ public class EventInfoCriteria implements Serializable, Criteria {
 
     private StringFilter name;
 
-    private LocalDateFilter startDate;
-
-    private LocalDateFilter endDate;
+    private LocalDateFilter date;
 
     private BigDecimalFilter amount;
 
@@ -69,8 +67,7 @@ public class EventInfoCriteria implements Serializable, Criteria {
     public EventInfoCriteria(EventInfoCriteria other) {
         this.id = other.id == null ? null : other.id.copy();
         this.name = other.name == null ? null : other.name.copy();
-        this.startDate = other.startDate == null ? null : other.startDate.copy();
-        this.endDate = other.endDate == null ? null : other.endDate.copy();
+        this.date = other.date == null ? null : other.date.copy();
         this.amount = other.amount == null ? null : other.amount.copy();
         this.amountType = other.amountType == null ? null : other.amountType.copy();
         this.colour = other.colour == null ? null : other.colour.copy();
@@ -99,20 +96,12 @@ public class EventInfoCriteria implements Serializable, Criteria {
         this.name = name;
     }
 
-    public LocalDateFilter getStartDate() {
-        return startDate;
+    public LocalDateFilter getDate() {
+        return date;
     }
 
-    public void setStartDate(LocalDateFilter startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDateFilter getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDateFilter endDate) {
-        this.endDate = endDate;
+    public void setDate(LocalDateFilter date) {
+        this.date = date;
     }
 
     public BigDecimalFilter getAmount() {
@@ -168,8 +157,7 @@ public class EventInfoCriteria implements Serializable, Criteria {
         return
             Objects.equals(id, that.id) &&
             Objects.equals(name, that.name) &&
-            Objects.equals(startDate, that.startDate) &&
-            Objects.equals(endDate, that.endDate) &&
+            Objects.equals(date, that.date) &&
             Objects.equals(amount, that.amount) &&
             Objects.equals(amountType, that.amountType) &&
             Objects.equals(colour, that.colour) &&
@@ -182,8 +170,7 @@ public class EventInfoCriteria implements Serializable, Criteria {
         return Objects.hash(
         id,
         name,
-        startDate,
-        endDate,
+        date,
         amount,
         amountType,
         colour,
@@ -197,8 +184,7 @@ public class EventInfoCriteria implements Serializable, Criteria {
         return "EventInfoCriteria{" +
                 (id != null ? "id=" + id + ", " : "") +
                 (name != null ? "name=" + name + ", " : "") +
-                (startDate != null ? "startDate=" + startDate + ", " : "") +
-                (endDate != null ? "endDate=" + endDate + ", " : "") +
+                (date != null ? "date=" + date + ", " : "") +
                 (amount != null ? "amount=" + amount + ", " : "") +
                 (amountType != null ? "amountType=" + amountType + ", " : "") +
                 (colour != null ? "colour=" + colour + ", " : "") +

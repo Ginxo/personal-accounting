@@ -17,8 +17,7 @@
         "title": "Event Info"
       },
       "name": "Name",
-      "startDate": "Start Date",
-      "endDate": "End Date",
+      "date": "Date",
       "amount": "Amount",
       "amountType": "Amount Type",
       "iterateInformation": "Iterate Information",

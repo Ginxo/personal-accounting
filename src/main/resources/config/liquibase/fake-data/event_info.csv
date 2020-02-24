@@ -1,7 +1,6 @@
 id;name;date;amount;amount_type;iterate_information;colour;calendar_id;type_id
-1;Current;2020-01-01;5000;FIX;;#FFFFFF;1;1
-2;Salary;2020-01-1;1500;SUM;../fake-data/blob/salary_repeat.txt;#c9f5c9;1;1
-3;Mortgage;2020-01-1;500;SUM;../fake-data/blob/mortgage_repeat.txt;#f5d0c9;1;2
-4;Couch 1/2;2020-02-1;1200;SUM;;#f5d0c9;1;2
-5;Couch 2/2;2020-03-1;1200;SUM;;#f5d0c9;1;2
-
+1;Current;2020-01-01;5000;FIX;../fake-data/blob/empty.json;#FFFFFF;1;1
+2;Salary;2020-01-1;1500;SUM;../fake-data/blob/salary_repeat.json;#c9f5c9;1;1
+3;Mortgage;2020-01-1;500;SUM;../fake-data/blob/mortgage_repeat.json;#f5d0c9;1;2
+4;Couch 1/2;2020-02-1;1200;SUM;../fake-data/blob/empty.json;#f5d0c9;1;2
+5;Couch 2/2;2020-03-1;1200;SUM;../fake-data/blob/empty.json;#f5d0c9;1;2

@@ -48,13 +48,9 @@ public class EventInfoResourceIT {
     private static final String DEFAULT_NAME = "AAAAAAAAAA";
     private static final String UPDATED_NAME = "BBBBBBBBBB";
 
-    private static final LocalDate DEFAULT_START_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_START_DATE = LocalDate.now(ZoneId.systemDefault());
-    private static final LocalDate SMALLER_START_DATE = LocalDate.ofEpochDay(-1L);
-
-    private static final LocalDate DEFAULT_END_DATE = LocalDate.ofEpochDay(0L);
-    private static final LocalDate UPDATED_END_DATE = LocalDate.now(ZoneId.systemDefault());
-    private static final LocalDate SMALLER_END_DATE = LocalDate.ofEpochDay(-1L);
+    private static final LocalDate DEFAULT_DATE = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DATE = LocalDate.now(ZoneId.systemDefault());
+    private static final LocalDate SMALLER_DATE = LocalDate.ofEpochDay(-1L);
 
     private static final BigDecimal DEFAULT_AMOUNT = new BigDecimal(1);
     private static final BigDecimal UPDATED_AMOUNT = new BigDecimal(2);
@@ -121,8 +117,7 @@ public class EventInfoResourceIT {
     public static EventInfo createEntity(EntityManager em) {
         EventInfo eventInfo = new EventInfo()
             .name(DEFAULT_NAME)
-            .startDate(DEFAULT_START_DATE)
-            .endDate(DEFAULT_END_DATE)
+            .date(DEFAULT_DATE)
             .amount(DEFAULT_AMOUNT)
             .amountType(DEFAULT_AMOUNT_TYPE)
             .iterateInformation(DEFAULT_ITERATE_INFORMATION)
@@ -158,8 +153,7 @@ public class EventInfoResourceIT {
     public static EventInfo createUpdatedEntity(EntityManager em) {
         EventInfo eventInfo = new EventInfo()
             .name(UPDATED_NAME)
-            .startDate(UPDATED_START_DATE)
-            .endDate(UPDATED_END_DATE)
+            .date(UPDATED_DATE)
             .amount(UPDATED_AMOUNT)
             .amountType(UPDATED_AMOUNT_TYPE)
             .iterateInformation(UPDATED_ITERATE_INFORMATION)
@@ -209,8 +203,7 @@ public class EventInfoResourceIT {
         assertThat(eventInfoList).hasSize(databaseSizeBeforeCreate + 1);
         EventInfo testEventInfo = eventInfoList.get(eventInfoList.size() - 1);
         assertThat(testEventInfo.getName()).isEqualTo(DEFAULT_NAME);
-        assertThat(testEventInfo.getStartDate()).isEqualTo(DEFAULT_START_DATE);
-        assertThat(testEventInfo.getEndDate()).isEqualTo(DEFAULT_END_DATE);
+        assertThat(testEventInfo.getDate()).isEqualTo(DEFAULT_DATE);
         assertThat(testEventInfo.getAmount()).isEqualTo(DEFAULT_AMOUNT);
         assertThat(testEventInfo.getAmountType()).isEqualTo(DEFAULT_AMOUNT_TYPE);
         assertThat(testEventInfo.getIterateInformation()).isEqualTo(DEFAULT_ITERATE_INFORMATION);
@@ -259,29 +252,10 @@ public class EventInfoResourceIT {
 
     @Test
     @Transactional
-    public void checkStartDateIsRequired() throws Exception {
+    public void checkDateIsRequired() throws Exception {
         int databaseSizeBeforeTest = eventInfoRepository.findAll().size();
         // set the field null
-        eventInfo.setStartDate(null);
-
-        // Create the EventInfo, which fails.
-        EventInfoDTO eventInfoDTO = eventInfoMapper.toDto(eventInfo);
-
-        restEventInfoMockMvc.perform(post("/api/event-infos")
-            .contentType(TestUtil.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(eventInfoDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<EventInfo> eventInfoList = eventInfoRepository.findAll();
-        assertThat(eventInfoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkEndDateIsRequired() throws Exception {
-        int databaseSizeBeforeTest = eventInfoRepository.findAll().size();
-        // set the field null
-        eventInfo.setEndDate(null);
+        eventInfo.setDate(null);
 
         // Create the EventInfo, which fails.
         EventInfoDTO eventInfoDTO = eventInfoMapper.toDto(eventInfo);
@@ -364,8 +338,7 @@ public class EventInfoResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(eventInfo.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].amountType").value(hasItem(DEFAULT_AMOUNT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].iterateInformation").value(hasItem(DEFAULT_ITERATE_INFORMATION.toString())))
@@ -384,8 +357,7 @@ public class EventInfoResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(eventInfo.getId().intValue()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME))
-            .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
-            .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
+            .andExpect(jsonPath("$.date").value(DEFAULT_DATE.toString()))
             .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.intValue()))
             .andExpect(jsonPath("$.amountType").value(DEFAULT_AMOUNT_TYPE.toString()))
             .andExpect(jsonPath("$.iterateInformation").value(DEFAULT_ITERATE_INFORMATION.toString()))
@@ -492,211 +464,106 @@ public class EventInfoResourceIT {
 
     @Test
     @Transactional
-    public void getAllEventInfosByStartDateIsEqualToSomething() throws Exception {
+    public void getAllEventInfosByDateIsEqualToSomething() throws Exception {
         // Initialize the database
         eventInfoRepository.saveAndFlush(eventInfo);
 
-        // Get all the eventInfoList where startDate equals to DEFAULT_START_DATE
-        defaultEventInfoShouldBeFound("startDate.equals=" + DEFAULT_START_DATE);
+        // Get all the eventInfoList where date equals to DEFAULT_DATE
+        defaultEventInfoShouldBeFound("date.equals=" + DEFAULT_DATE);
 
-        // Get all the eventInfoList where startDate equals to UPDATED_START_DATE
-        defaultEventInfoShouldNotBeFound("startDate.equals=" + UPDATED_START_DATE);
+        // Get all the eventInfoList where date equals to UPDATED_DATE
+        defaultEventInfoShouldNotBeFound("date.equals=" + UPDATED_DATE);
     }
 
     @Test
     @Transactional
-    public void getAllEventInfosByStartDateIsNotEqualToSomething() throws Exception {
+    public void getAllEventInfosByDateIsNotEqualToSomething() throws Exception {
         // Initialize the database
         eventInfoRepository.saveAndFlush(eventInfo);
 
-        // Get all the eventInfoList where startDate not equals to DEFAULT_START_DATE
-        defaultEventInfoShouldNotBeFound("startDate.notEquals=" + DEFAULT_START_DATE);
+        // Get all the eventInfoList where date not equals to DEFAULT_DATE
+        defaultEventInfoShouldNotBeFound("date.notEquals=" + DEFAULT_DATE);
 
-        // Get all the eventInfoList where startDate not equals to UPDATED_START_DATE
-        defaultEventInfoShouldBeFound("startDate.notEquals=" + UPDATED_START_DATE);
+        // Get all the eventInfoList where date not equals to UPDATED_DATE
+        defaultEventInfoShouldBeFound("date.notEquals=" + UPDATED_DATE);
     }
 
     @Test
     @Transactional
-    public void getAllEventInfosByStartDateIsInShouldWork() throws Exception {
+    public void getAllEventInfosByDateIsInShouldWork() throws Exception {
         // Initialize the database
         eventInfoRepository.saveAndFlush(eventInfo);
 
-        // Get all the eventInfoList where startDate in DEFAULT_START_DATE or UPDATED_START_DATE
-        defaultEventInfoShouldBeFound("startDate.in=" + DEFAULT_START_DATE + "," + UPDATED_START_DATE);
+        // Get all the eventInfoList where date in DEFAULT_DATE or UPDATED_DATE
+        defaultEventInfoShouldBeFound("date.in=" + DEFAULT_DATE + "," + UPDATED_DATE);
 
-        // Get all the eventInfoList where startDate equals to UPDATED_START_DATE
-        defaultEventInfoShouldNotBeFound("startDate.in=" + UPDATED_START_DATE);
+        // Get all the eventInfoList where date equals to UPDATED_DATE
+        defaultEventInfoShouldNotBeFound("date.in=" + UPDATED_DATE);
     }
 
     @Test
     @Transactional
-    public void getAllEventInfosByStartDateIsNullOrNotNull() throws Exception {
+    public void getAllEventInfosByDateIsNullOrNotNull() throws Exception {
         // Initialize the database
         eventInfoRepository.saveAndFlush(eventInfo);
 
-        // Get all the eventInfoList where startDate is not null
-        defaultEventInfoShouldBeFound("startDate.specified=true");
+        // Get all the eventInfoList where date is not null
+        defaultEventInfoShouldBeFound("date.specified=true");
 
-        // Get all the eventInfoList where startDate is null
-        defaultEventInfoShouldNotBeFound("startDate.specified=false");
+        // Get all the eventInfoList where date is null
+        defaultEventInfoShouldNotBeFound("date.specified=false");
     }
 
     @Test
     @Transactional
-    public void getAllEventInfosByStartDateIsGreaterThanOrEqualToSomething() throws Exception {
+    public void getAllEventInfosByDateIsGreaterThanOrEqualToSomething() throws Exception {
         // Initialize the database
         eventInfoRepository.saveAndFlush(eventInfo);
 
-        // Get all the eventInfoList where startDate is greater than or equal to DEFAULT_START_DATE
-        defaultEventInfoShouldBeFound("startDate.greaterThanOrEqual=" + DEFAULT_START_DATE);
+        // Get all the eventInfoList where date is greater than or equal to DEFAULT_DATE
+        defaultEventInfoShouldBeFound("date.greaterThanOrEqual=" + DEFAULT_DATE);
 
-        // Get all the eventInfoList where startDate is greater than or equal to UPDATED_START_DATE
-        defaultEventInfoShouldNotBeFound("startDate.greaterThanOrEqual=" + UPDATED_START_DATE);
+        // Get all the eventInfoList where date is greater than or equal to UPDATED_DATE
+        defaultEventInfoShouldNotBeFound("date.greaterThanOrEqual=" + UPDATED_DATE);
     }
 
     @Test
     @Transactional
-    public void getAllEventInfosByStartDateIsLessThanOrEqualToSomething() throws Exception {
+    public void getAllEventInfosByDateIsLessThanOrEqualToSomething() throws Exception {
         // Initialize the database
         eventInfoRepository.saveAndFlush(eventInfo);
 
-        // Get all the eventInfoList where startDate is less than or equal to DEFAULT_START_DATE
-        defaultEventInfoShouldBeFound("startDate.lessThanOrEqual=" + DEFAULT_START_DATE);
+        // Get all the eventInfoList where date is less than or equal to DEFAULT_DATE
+        defaultEventInfoShouldBeFound("date.lessThanOrEqual=" + DEFAULT_DATE);
 
-        // Get all the eventInfoList where startDate is less than or equal to SMALLER_START_DATE
-        defaultEventInfoShouldNotBeFound("startDate.lessThanOrEqual=" + SMALLER_START_DATE);
+        // Get all the eventInfoList where date is less than or equal to SMALLER_DATE
+        defaultEventInfoShouldNotBeFound("date.lessThanOrEqual=" + SMALLER_DATE);
     }
 
     @Test
     @Transactional
-    public void getAllEventInfosByStartDateIsLessThanSomething() throws Exception {
+    public void getAllEventInfosByDateIsLessThanSomething() throws Exception {
         // Initialize the database
         eventInfoRepository.saveAndFlush(eventInfo);
 
-        // Get all the eventInfoList where startDate is less than DEFAULT_START_DATE
-        defaultEventInfoShouldNotBeFound("startDate.lessThan=" + DEFAULT_START_DATE);
+        // Get all the eventInfoList where date is less than DEFAULT_DATE
+        defaultEventInfoShouldNotBeFound("date.lessThan=" + DEFAULT_DATE);
 
-        // Get all the eventInfoList where startDate is less than UPDATED_START_DATE
-        defaultEventInfoShouldBeFound("startDate.lessThan=" + UPDATED_START_DATE);
+        // Get all the eventInfoList where date is less than UPDATED_DATE
+        defaultEventInfoShouldBeFound("date.lessThan=" + UPDATED_DATE);
     }
 
     @Test
     @Transactional
-    public void getAllEventInfosByStartDateIsGreaterThanSomething() throws Exception {
+    public void getAllEventInfosByDateIsGreaterThanSomething() throws Exception {
         // Initialize the database
         eventInfoRepository.saveAndFlush(eventInfo);
 
-        // Get all the eventInfoList where startDate is greater than DEFAULT_START_DATE
-        defaultEventInfoShouldNotBeFound("startDate.greaterThan=" + DEFAULT_START_DATE);
+        // Get all the eventInfoList where date is greater than DEFAULT_DATE
+        defaultEventInfoShouldNotBeFound("date.greaterThan=" + DEFAULT_DATE);
 
-        // Get all the eventInfoList where startDate is greater than SMALLER_START_DATE
-        defaultEventInfoShouldBeFound("startDate.greaterThan=" + SMALLER_START_DATE);
-    }
-
-
-    @Test
-    @Transactional
-    public void getAllEventInfosByEndDateIsEqualToSomething() throws Exception {
-        // Initialize the database
-        eventInfoRepository.saveAndFlush(eventInfo);
-
-        // Get all the eventInfoList where endDate equals to DEFAULT_END_DATE
-        defaultEventInfoShouldBeFound("endDate.equals=" + DEFAULT_END_DATE);
-
-        // Get all the eventInfoList where endDate equals to UPDATED_END_DATE
-        defaultEventInfoShouldNotBeFound("endDate.equals=" + UPDATED_END_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllEventInfosByEndDateIsNotEqualToSomething() throws Exception {
-        // Initialize the database
-        eventInfoRepository.saveAndFlush(eventInfo);
-
-        // Get all the eventInfoList where endDate not equals to DEFAULT_END_DATE
-        defaultEventInfoShouldNotBeFound("endDate.notEquals=" + DEFAULT_END_DATE);
-
-        // Get all the eventInfoList where endDate not equals to UPDATED_END_DATE
-        defaultEventInfoShouldBeFound("endDate.notEquals=" + UPDATED_END_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllEventInfosByEndDateIsInShouldWork() throws Exception {
-        // Initialize the database
-        eventInfoRepository.saveAndFlush(eventInfo);
-
-        // Get all the eventInfoList where endDate in DEFAULT_END_DATE or UPDATED_END_DATE
-        defaultEventInfoShouldBeFound("endDate.in=" + DEFAULT_END_DATE + "," + UPDATED_END_DATE);
-
-        // Get all the eventInfoList where endDate equals to UPDATED_END_DATE
-        defaultEventInfoShouldNotBeFound("endDate.in=" + UPDATED_END_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllEventInfosByEndDateIsNullOrNotNull() throws Exception {
-        // Initialize the database
-        eventInfoRepository.saveAndFlush(eventInfo);
-
-        // Get all the eventInfoList where endDate is not null
-        defaultEventInfoShouldBeFound("endDate.specified=true");
-
-        // Get all the eventInfoList where endDate is null
-        defaultEventInfoShouldNotBeFound("endDate.specified=false");
-    }
-
-    @Test
-    @Transactional
-    public void getAllEventInfosByEndDateIsGreaterThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        eventInfoRepository.saveAndFlush(eventInfo);
-
-        // Get all the eventInfoList where endDate is greater than or equal to DEFAULT_END_DATE
-        defaultEventInfoShouldBeFound("endDate.greaterThanOrEqual=" + DEFAULT_END_DATE);
-
-        // Get all the eventInfoList where endDate is greater than or equal to UPDATED_END_DATE
-        defaultEventInfoShouldNotBeFound("endDate.greaterThanOrEqual=" + UPDATED_END_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllEventInfosByEndDateIsLessThanOrEqualToSomething() throws Exception {
-        // Initialize the database
-        eventInfoRepository.saveAndFlush(eventInfo);
-
-        // Get all the eventInfoList where endDate is less than or equal to DEFAULT_END_DATE
-        defaultEventInfoShouldBeFound("endDate.lessThanOrEqual=" + DEFAULT_END_DATE);
-
-        // Get all the eventInfoList where endDate is less than or equal to SMALLER_END_DATE
-        defaultEventInfoShouldNotBeFound("endDate.lessThanOrEqual=" + SMALLER_END_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllEventInfosByEndDateIsLessThanSomething() throws Exception {
-        // Initialize the database
-        eventInfoRepository.saveAndFlush(eventInfo);
-
-        // Get all the eventInfoList where endDate is less than DEFAULT_END_DATE
-        defaultEventInfoShouldNotBeFound("endDate.lessThan=" + DEFAULT_END_DATE);
-
-        // Get all the eventInfoList where endDate is less than UPDATED_END_DATE
-        defaultEventInfoShouldBeFound("endDate.lessThan=" + UPDATED_END_DATE);
-    }
-
-    @Test
-    @Transactional
-    public void getAllEventInfosByEndDateIsGreaterThanSomething() throws Exception {
-        // Initialize the database
-        eventInfoRepository.saveAndFlush(eventInfo);
-
-        // Get all the eventInfoList where endDate is greater than DEFAULT_END_DATE
-        defaultEventInfoShouldNotBeFound("endDate.greaterThan=" + DEFAULT_END_DATE);
-
-        // Get all the eventInfoList where endDate is greater than SMALLER_END_DATE
-        defaultEventInfoShouldBeFound("endDate.greaterThan=" + SMALLER_END_DATE);
+        // Get all the eventInfoList where date is greater than SMALLER_DATE
+        defaultEventInfoShouldBeFound("date.greaterThan=" + SMALLER_DATE);
     }
 
 
@@ -975,8 +842,7 @@ public class EventInfoResourceIT {
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(eventInfo.getId().intValue())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME)))
-            .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
-            .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
+            .andExpect(jsonPath("$.[*].date").value(hasItem(DEFAULT_DATE.toString())))
             .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].amountType").value(hasItem(DEFAULT_AMOUNT_TYPE.toString())))
             .andExpect(jsonPath("$.[*].iterateInformation").value(hasItem(DEFAULT_ITERATE_INFORMATION.toString())))
@@ -1029,8 +895,7 @@ public class EventInfoResourceIT {
         em.detach(updatedEventInfo);
         updatedEventInfo
             .name(UPDATED_NAME)
-            .startDate(UPDATED_START_DATE)
-            .endDate(UPDATED_END_DATE)
+            .date(UPDATED_DATE)
             .amount(UPDATED_AMOUNT)
             .amountType(UPDATED_AMOUNT_TYPE)
             .iterateInformation(UPDATED_ITERATE_INFORMATION)
@@ -1047,8 +912,7 @@ public class EventInfoResourceIT {
         assertThat(eventInfoList).hasSize(databaseSizeBeforeUpdate);
         EventInfo testEventInfo = eventInfoList.get(eventInfoList.size() - 1);
         assertThat(testEventInfo.getName()).isEqualTo(UPDATED_NAME);
-        assertThat(testEventInfo.getStartDate()).isEqualTo(UPDATED_START_DATE);
-        assertThat(testEventInfo.getEndDate()).isEqualTo(UPDATED_END_DATE);
+        assertThat(testEventInfo.getDate()).isEqualTo(UPDATED_DATE);
         assertThat(testEventInfo.getAmount()).isEqualTo(UPDATED_AMOUNT);
         assertThat(testEventInfo.getAmountType()).isEqualTo(UPDATED_AMOUNT_TYPE);
         assertThat(testEventInfo.getIterateInformation()).isEqualTo(UPDATED_ITERATE_INFORMATION);

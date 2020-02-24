@@ -18,10 +18,7 @@
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="start_date" type="date">
-                <constraints nullable="false" />
-            </column>
-            <column name="end_date" type="date">
+            <column name="date" type="date">
                 <constraints nullable="false" />
             </column>
             <column name="amount" type="decimal(21,2)">
@@ -66,8 +63,7 @@
                   tableName="event_info">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
-            <column name="start_date" type="date"/>
-            <column name="end_date" type="date"/>
+            <column name="date" type="date"/>
             <column name="amount" type="numeric"/>
             <column name="amount_type" type="string"/>
             <column name="iterate_information" type="clob"/>

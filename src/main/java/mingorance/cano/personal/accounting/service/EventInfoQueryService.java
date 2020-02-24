@@ -94,11 +94,8 @@ public class EventInfoQueryService extends QueryService<EventInfo> {
             if (criteria.getName() != null) {
                 specification = specification.and(buildStringSpecification(criteria.getName(), EventInfo_.name));
             }
-            if (criteria.getStartDate() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getStartDate(), EventInfo_.startDate));
-            }
-            if (criteria.getEndDate() != null) {
-                specification = specification.and(buildRangeSpecification(criteria.getEndDate(), EventInfo_.endDate));
+            if (criteria.getDate() != null) {
+                specification = specification.and(buildRangeSpecification(criteria.getDate(), EventInfo_.date));
             }
             if (criteria.getAmount() != null) {
                 specification = specification.and(buildRangeSpecification(criteria.getAmount(), EventInfo_.amount));

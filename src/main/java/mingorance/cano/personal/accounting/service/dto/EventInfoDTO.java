@@ -19,10 +19,7 @@ public class EventInfoDTO implements Serializable {
     private String name;
 
     @NotNull
-    private LocalDate startDate;
-
-    @NotNull
-    private LocalDate endDate;
+    private LocalDate date;
 
     @NotNull
     private BigDecimal amount;
@@ -57,20 +54,12 @@ public class EventInfoDTO implements Serializable {
         this.name = name;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public BigDecimal getAmount() {
@@ -147,8 +136,7 @@ public class EventInfoDTO implements Serializable {
         return "EventInfoDTO{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", startDate='" + getStartDate() + "'" +
-            ", endDate='" + getEndDate() + "'" +
+            ", date='" + getDate() + "'" +
             ", amount=" + getAmount() +
             ", amountType='" + getAmountType() + "'" +
             ", iterateInformation='" + getIterateInformation() + "'" +

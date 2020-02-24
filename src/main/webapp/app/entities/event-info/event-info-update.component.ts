@@ -24,14 +24,12 @@ export class EventInfoUpdateComponent implements OnInit {
   isSaving = false;
   calendars: ICalendar[] = [];
   eventinfotypes: IEventInfoType[] = [];
-  startDateDp: any;
-  endDateDp: any;
+  dateDp: any;
 
   editForm = this.fb.group({
     id: [],
     name: [null, [Validators.required]],
-    startDate: [null, [Validators.required]],
-    endDate: [null, [Validators.required]],
+    date: [null, [Validators.required]],
     amount: [null, [Validators.required]],
     amountType: [null, [Validators.required]],
     iterateInformation: [],
@@ -64,8 +62,7 @@ export class EventInfoUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: eventInfo.id,
       name: eventInfo.name,
-      startDate: eventInfo.startDate,
-      endDate: eventInfo.endDate,
+      date: eventInfo.date,
       amount: eventInfo.amount,
       amountType: eventInfo.amountType,
       iterateInformation: eventInfo.iterateInformation,
@@ -110,8 +107,7 @@ export class EventInfoUpdateComponent implements OnInit {
       ...new EventInfo(),
       id: this.editForm.get(['id'])!.value,
       name: this.editForm.get(['name'])!.value,
-      startDate: this.editForm.get(['startDate'])!.value,
-      endDate: this.editForm.get(['endDate'])!.value,
+      date: this.editForm.get(['date'])!.value,
       amount: this.editForm.get(['amount'])!.value,
       amountType: this.editForm.get(['amountType'])!.value,
       iterateInformation: this.editForm.get(['iterateInformation'])!.value,

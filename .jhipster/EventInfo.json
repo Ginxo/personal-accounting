@@ -9,14 +9,7 @@
             ]
         },
         {
-            "fieldName": "startDate",
-            "fieldType": "LocalDate",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "endDate",
+            "fieldName": "date",
             "fieldType": "LocalDate",
             "fieldValidateRules": [
                 "required"

@@ -25,15 +25,14 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new EventInfo(0, 'AAAAAAA', currentDate, currentDate, 0, AmountType.SUM, 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new EventInfo(0, 'AAAAAAA', currentDate, 0, AmountType.SUM, 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            startDate: currentDate.format(DATE_FORMAT),
-            endDate: currentDate.format(DATE_FORMAT)
+            date: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -49,16 +48,14 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            startDate: currentDate.format(DATE_FORMAT),
-            endDate: currentDate.format(DATE_FORMAT)
+            date: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            startDate: currentDate,
-            endDate: currentDate
+            date: currentDate
           },
           returnedFromService
         );
@@ -74,8 +71,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
-            startDate: currentDate.format(DATE_FORMAT),
-            endDate: currentDate.format(DATE_FORMAT),
+            date: currentDate.format(DATE_FORMAT),
             amount: 1,
             amountType: 'BBBBBB',
             iterateInformation: 'BBBBBB',
@@ -86,8 +82,7 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
-            startDate: currentDate,
-            endDate: currentDate
+            date: currentDate
           },
           returnedFromService
         );
@@ -103,8 +98,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             name: 'BBBBBB',
-            startDate: currentDate.format(DATE_FORMAT),
-            endDate: currentDate.format(DATE_FORMAT),
+            date: currentDate.format(DATE_FORMAT),
             amount: 1,
             amountType: 'BBBBBB',
             iterateInformation: 'BBBBBB',
@@ -115,8 +109,7 @@ describe('Service Tests', () => {
 
         const expected = Object.assign(
           {
-            startDate: currentDate,
-            endDate: currentDate
+            date: currentDate
           },
           returnedFromService
         );

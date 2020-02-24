@@ -34,12 +34,8 @@ public class EventInfo implements Serializable {
     private String name;
 
     @NotNull
-    @Column(name = "start_date", nullable = false)
-    private LocalDate startDate;
-
-    @NotNull
-    @Column(name = "end_date", nullable = false)
-    private LocalDate endDate;
+    @Column(name = "date", nullable = false)
+    private LocalDate date;
 
     @NotNull
     @Column(name = "amount", precision = 21, scale = 2, nullable = false)
@@ -91,30 +87,17 @@ public class EventInfo implements Serializable {
         this.name = name;
     }
 
-    public LocalDate getStartDate() {
-        return startDate;
+    public LocalDate getDate() {
+        return date;
     }
 
-    public EventInfo startDate(LocalDate startDate) {
-        this.startDate = startDate;
+    public EventInfo date(LocalDate date) {
+        this.date = date;
         return this;
     }
 
-    public void setStartDate(LocalDate startDate) {
-        this.startDate = startDate;
-    }
-
-    public LocalDate getEndDate() {
-        return endDate;
-    }
-
-    public EventInfo endDate(LocalDate endDate) {
-        this.endDate = endDate;
-        return this;
-    }
-
-    public void setEndDate(LocalDate endDate) {
-        this.endDate = endDate;
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public BigDecimal getAmount() {
@@ -217,8 +200,7 @@ public class EventInfo implements Serializable {
         return "EventInfo{" +
             "id=" + getId() +
             ", name='" + getName() + "'" +
-            ", startDate='" + getStartDate() + "'" +
-            ", endDate='" + getEndDate() + "'" +
+            ", date='" + getDate() + "'" +
             ", amount=" + getAmount() +
             ", amountType='" + getAmountType() + "'" +
             ", iterateInformation='" + getIterateInformation() + "'" +

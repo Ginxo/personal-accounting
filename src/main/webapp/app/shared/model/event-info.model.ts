@@ -4,8 +4,7 @@ import { AmountType } from 'app/shared/model/enumerations/amount-type.model';
 export interface IEventInfo {
   id?: number;
   name?: string;
-  startDate?: Moment;
-  endDate?: Moment;
+  date?: Moment;
   amount?: number;
   amountType?: AmountType;
   iterateInformation?: any;
@@ -18,8 +17,7 @@ export class EventInfo implements IEventInfo {
   constructor(
     public id?: number,
     public name?: string,
-    public startDate?: Moment,
-    public endDate?: Moment,
+    public date?: Moment,
     public amount?: number,
     public amountType?: AmountType,
     public iterateInformation?: any,

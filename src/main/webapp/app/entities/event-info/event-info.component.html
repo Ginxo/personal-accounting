@@ -24,8 +24,7 @@
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
                     <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="name"><span jhiTranslate="personalAccountingApp.eventInfo.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="startDate"><span jhiTranslate="personalAccountingApp.eventInfo.startDate">Start Date</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="endDate"><span jhiTranslate="personalAccountingApp.eventInfo.endDate">End Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="date"><span jhiTranslate="personalAccountingApp.eventInfo.date">Date</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="amount"><span jhiTranslate="personalAccountingApp.eventInfo.amount">Amount</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="amountType"><span jhiTranslate="personalAccountingApp.eventInfo.amountType">Amount Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="iterateInformation"><span jhiTranslate="personalAccountingApp.eventInfo.iterateInformation">Iterate Information</span> <fa-icon icon="sort"></fa-icon></th>
@@ -39,8 +38,7 @@
                 <tr *ngFor="let eventInfo of eventInfos ;trackBy: trackId">
                     <td><a [routerLink]="['/event-info', eventInfo.id, 'view']">{{ eventInfo.id }}</a></td>
                     <td>{{ eventInfo.name }}</td>
-                    <td>{{ eventInfo.startDate | date:'mediumDate' }}</td>
-                    <td>{{ eventInfo.endDate | date:'mediumDate' }}</td>
+                    <td>{{ eventInfo.date | date:'mediumDate' }}</td>
                     <td>{{ eventInfo.amount }}</td>
                     <td jhiTranslate="{{ 'personalAccountingApp.AmountType.' + eventInfo.amountType }}">{{ eventInfo.amountType }}</td>
                     <td>{{ eventInfo.iterateInformation }}</td>
