@@ -13,8 +13,7 @@ entity Calendar {
 
 entity EventInfo {
 	name String required,
-    startDate LocalDate required,
-    endDate LocalDate required,
+    date LocalDate required,
     amount BigDecimal required,
     amountType AmountType required,
     iterateInformation TextBlob,
