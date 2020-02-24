@@ -23,7 +23,13 @@
       "amountDifference": "Diferencia",
       "amountType": "Tipo de Cantidad",
       "colour": "Color",
-      "icon": "Icono"
+      "icon": "Icono",
+      "form": {
+        "filter": {
+          "from": "Desde",
+          "to": "Hasta"
+        }
+      }
     }
   }
 }

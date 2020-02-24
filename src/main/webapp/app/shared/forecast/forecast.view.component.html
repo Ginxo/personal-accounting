@@ -1,4 +1,20 @@
-<div *ngIf="forecasts$ | async ; let forecasts">
+<form class="form" role="form" (ngSubmit)="executeForecast()" [formGroup]="filterForm">
+  <div class="row pb-2">
+    <div class="col-md-4">
+      <label for="fromDate" jhiTranslate="personalAccountingApp.forecast.form.filter.from">From</label>
+      <input type="date" class="form-control" name="fromDate" id="fromDate" formControlName="fromDate" #fromDate
+        required />
+    </div>
+    <div class="col-md-4">
+      <label for="toDate" jhiTranslate="personalAccountingApp.forecast.form.filter.to">To</label>
+      <input type="date" class="form-control" name="toDate" id="toDate" formControlName="toDate" #toDate required />
+    </div>
+    <div class="col-md-4">
+      <button type="submit" class="btn btn-primary" jhiTranslate="entity.action.filter">Filter</button>
+    </div>
+  </div>
+</form>
+<div class="table-responsive" id="entities" *ngIf="forecasts$ | async ; let forecasts">
   <table class="table table-striped" aria-describedby="page-heading">
     <thead>
       <tr>
@@ -27,7 +43,8 @@
         <td>{{ forecast.name }}</td>
         <td>{{ forecast.date | date:'mediumDate' }}</td>
         <td>{{ forecast.amount | currency:'EUR':'symbol' }}</td>
-        <td jhiTranslate="{{ 'personalAccountingApp.AmountType.' + forecast.eventInfo.amountType }}">{{ forecast.amountType }}
+        <td jhiTranslate="{{ 'personalAccountingApp.AmountType.' + forecast.eventInfo.amountType }}">
+          {{ forecast.amountType }}
         </td>
         <td>{{ forecast.totalAmount | currency:'EUR':'symbol' }}</td>
         <td>{{ forecast.amountDifference | currency:'EUR':'symbol' }}</td>

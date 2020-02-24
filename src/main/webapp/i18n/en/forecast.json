@@ -23,7 +23,13 @@
       "totalAmount": "Total Amount",
       "amountType": "Amount Type",
       "colour": "Colour",
-      "icon": "Icon"
+      "icon": "Icon",
+      "form": {
+        "filter": {
+          "from": "From",
+          "to": "To"
+        }
+      }
     }
   }
 }

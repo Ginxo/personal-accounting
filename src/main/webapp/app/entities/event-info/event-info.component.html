@@ -19,7 +19,7 @@
         <span jhiTranslate="personalAccountingApp.eventInfo.home.notFound">No eventInfos found</span>
     </div>
 
-    <div class="table-responsive" id="entities" *ngIf="eventInfos?.length > 0">
+    <div class="table-responsive pb-5" id="entities" *ngIf="eventInfos?.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
@@ -118,7 +118,5 @@
             </tbody>
         </table>
     </div>
-    <div class="table-responsive" id="entities" *ngIf="eventInfos?.length > 0">
-        <jhi-forecast-view></jhi-forecast-view>
-    </div>
+    <jhi-forecast-view></jhi-forecast-view>
 </div>

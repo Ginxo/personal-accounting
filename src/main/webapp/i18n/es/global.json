@@ -104,7 +104,8 @@
       "edit": "Editar",
       "open": "Abrir",
       "save": "Guardar",
-      "view": "Vista"
+      "view": "Vista",
+      "filter": "Filtro"
     },
     "detail": {
       "field": "Campo",

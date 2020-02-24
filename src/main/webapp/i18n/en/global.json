@@ -104,7 +104,8 @@
       "edit": "Edit",
       "open": "Open",
       "save": "Save",
-      "view": "View"
+      "view": "View",
+      "filter": "Filter"
     },
     "detail": {
       "field": "Field",

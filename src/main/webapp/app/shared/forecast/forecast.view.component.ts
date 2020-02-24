@@ -21,8 +21,12 @@ export class ForecastViewComponent implements OnInit {
   forecasts$?: Observable<IForecastInfo[]>;
 
   filterForm = this.fb.group({
-    startDate: [moment()],
-    endDate: [moment().add(1, 'year')]
+    fromDate: [moment().toDate()],
+    toDate: [
+      moment()
+        .add(1, 'year')
+        .toDate()
+    ]
   });
 
   constructor(private eventInfoService: EventInfoService, private fb: FormBuilder) {}
@@ -32,12 +36,10 @@ export class ForecastViewComponent implements OnInit {
   }
 
   executeForecast(): void {
-    // eslint-disable-next-line no-console
-    console.log('executeForecast');
     this.forecasts$ = this.eventInfoService
       .query({
-        'startDate.greaterThanOrEqual': this.filterForm.get('startDate')!.value.format(DATE_FORMAT),
-        'startDate.lessThanOrEqual': this.filterForm.get('endDate')!.value.format(DATE_FORMAT)
+        'startDate.greaterThanOrEqual': moment(this.filterForm.get('fromDate')!.value).format(DATE_FORMAT),
+        'startDate.lessThanOrEqual': moment(this.filterForm.get('toDate')!.value).format(DATE_FORMAT)
       })
       .pipe(
         filter((response: HttpResponse<IEventInfo[]>) => response.ok),
@@ -63,6 +65,7 @@ export class ForecastViewComponent implements OnInit {
     const foreCastInfo = new ForecastInfo();
     const currentAmountType = event.amountType !== undefined ? event.amountType : AmountType.SUM;
     const currentAmount = event.amount !== undefined ? event.amount : 0;
+    foreCastInfo.name = event.name;
     foreCastInfo.amount = currentAmount;
     const newTotalAmount = AmountType.FIX.valueOf() === currentAmountType ? currentAmount : totalAmount + currentAmount;
     foreCastInfo.totalAmount = newTotalAmount;
