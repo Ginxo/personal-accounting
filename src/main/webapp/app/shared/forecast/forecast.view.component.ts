@@ -2,15 +2,16 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { User } from 'app/core/user/user.model';
+import { EventInfoTypeService } from 'app/entities/event-info-type/event-info-type.service';
 import { EventInfoService } from 'app/entities/event-info/event-info.service';
 import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { filter, map } from 'rxjs/operators';
-import { AmountType } from '../model/enumerations/amount-type.model';
-import { IEventInfo } from '../model/event-info.model';
-import { ForecastInfo, IForecastInfo } from '../model/forecast-info.model';
 import { DATE_FORMAT } from '../constants/input.constants';
-import { EventInfoTypeService } from 'app/entities/event-info-type/event-info-type.service';
+import { IEventInfo } from '../model/event-info.model';
+import { IForecastInfo } from '../model/forecast-info.model';
+import { treatEventRecurrency } from '../rschedule/treatEventRecurrency';
+import { mapEventToForecast } from './forecast.mapper';
 
 @Component({
   selector: 'jhi-forecast-view',
@@ -51,31 +52,17 @@ export class ForecastViewComponent implements OnInit {
   }
 
   private generateForecast(events: IEventInfo[]): IForecastInfo[] {
-    const sortedEvents = events.sort((a, b) => {
-      return a.date !== undefined && b.date !== undefined ? Number(a.date.toDate()) - Number(b.date.toDate()) : 0;
-    });
+    const sortedEvents = events
+      .flatMap(e => treatEventRecurrency(e))
+      .sort((a, b) => {
+        return a.date !== undefined && b.date !== undefined ? Number(a.date.toDate()) - Number(b.date.toDate()) : 0;
+      });
 
     let totalAmount = 0;
     return sortedEvents.map(event => {
-      const foreCastInfo = this.mapEventToForecast(event, totalAmount);
+      const foreCastInfo = mapEventToForecast(event, totalAmount);
       totalAmount = foreCastInfo.totalAmount !== undefined ? foreCastInfo.totalAmount : 0;
       return foreCastInfo;
     });
-  }
-
-  private mapEventToForecast(event: IEventInfo, totalAmount: number): IForecastInfo {
-    const foreCastInfo = new ForecastInfo();
-    const currentAmountType = event.amountType !== undefined ? event.amountType : AmountType.SUM;
-    const currentAmount = event.amount !== undefined ? event.amount : 0;
-    foreCastInfo.name = event.name;
-    foreCastInfo.amount = currentAmount;
-    const newTotalAmount = AmountType.FIX.valueOf() === currentAmountType ? currentAmount : totalAmount + currentAmount;
-    foreCastInfo.totalAmount = newTotalAmount;
-    foreCastInfo.amountDifference = newTotalAmount - totalAmount;
-    foreCastInfo.colour = event.colour;
-    foreCastInfo.date = event.date;
-    foreCastInfo.icon = event.type !== undefined ? event.type.icon : '';
-    foreCastInfo.eventInfo = event;
-    return foreCastInfo;
   }
 }

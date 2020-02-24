@@ -1,6 +1,6 @@
 {
   "frequency": "MONTHLY",
   "byDayOfMonth": [1],
-  "start": "20200101T000000",
-  "end": "20500501T000000"
+  "start": "2020-01-01",
+  "end": "2050-01-01"
 }
