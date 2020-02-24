@@ -8,7 +8,6 @@ export interface IEventInfo {
   endDate?: Moment;
   amount?: number;
   amountType?: AmountType;
-  iterateInformationContentType?: string;
   iterateInformation?: any;
   colour?: string;
   calendarId?: number;
@@ -23,7 +22,6 @@ export class EventInfo implements IEventInfo {
     public endDate?: Moment,
     public amount?: number,
     public amountType?: AmountType,
-    public iterateInformationContentType?: string,
     public iterateInformation?: any,
     public colour?: string,
     public calendarId?: number,

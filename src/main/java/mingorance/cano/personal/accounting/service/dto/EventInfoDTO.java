@@ -31,9 +31,8 @@ public class EventInfoDTO implements Serializable {
     private AmountType amountType;
 
     @Lob
-    private byte[] iterateInformation;
+    private String iterateInformation;
 
-    private String iterateInformationContentType;
     @NotNull
     private String colour;
 
@@ -90,20 +89,12 @@ public class EventInfoDTO implements Serializable {
         this.amountType = amountType;
     }
 
-    public byte[] getIterateInformation() {
+    public String getIterateInformation() {
         return iterateInformation;
     }
 
-    public void setIterateInformation(byte[] iterateInformation) {
+    public void setIterateInformation(String iterateInformation) {
         this.iterateInformation = iterateInformation;
-    }
-
-    public String getIterateInformationContentType() {
-        return iterateInformationContentType;
-    }
-
-    public void setIterateInformationContentType(String iterateInformationContentType) {
-        this.iterateInformationContentType = iterateInformationContentType;
     }
 
     public String getColour() {

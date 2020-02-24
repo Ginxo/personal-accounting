@@ -2,11 +2,10 @@
     <h2 id="page-heading">
         <span jhiTranslate="personalAccountingApp.eventInfo.home.title">Event Infos</span>
 
-        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-event-info"
-            [routerLink]="['/event-info/new']">
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-event-info" [routerLink]="['/event-info/new']">
             <fa-icon icon="plus"></fa-icon>
-            <span jhiTranslate="personalAccountingApp.eventInfo.home.createLabel">
-                Create a new Event Info
+            <span  jhiTranslate="personalAccountingApp.eventInfo.home.createLabel">
+            Create a new Event Info
             </span>
         </button>
     </h2>
@@ -19,96 +18,61 @@
         <span jhiTranslate="personalAccountingApp.eventInfo.home.notFound">No eventInfos found</span>
     </div>
 
-    <div class="table-responsive pb-5" id="entities" *ngIf="eventInfos?.length > 0">
+    <div class="table-responsive" id="entities" *ngIf="eventInfos?.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
                 <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="reset.bind(this)">
-                    <th scope="col" jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="name"><span
-                            jhiTranslate="personalAccountingApp.eventInfo.name">Name</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="startDate"><span
-                            jhiTranslate="personalAccountingApp.eventInfo.startDate">Start Date</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="endDate"><span jhiTranslate="personalAccountingApp.eventInfo.endDate">End
-                            Date</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="amount"><span
-                            jhiTranslate="personalAccountingApp.eventInfo.amount">Amount</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="amountType"><span
-                            jhiTranslate="personalAccountingApp.eventInfo.amountType">Amount Type</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="iterateInformation"><span
-                            jhiTranslate="personalAccountingApp.eventInfo.iterateInformation">Iterate Information</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="colour"><span
-                            jhiTranslate="personalAccountingApp.eventInfo.colour">Colour</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="calendarId"><span
-                            jhiTranslate="personalAccountingApp.eventInfo.calendar">Calendar</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
-                    <th scope="col" jhiSortBy="typeId"><span
-                            jhiTranslate="personalAccountingApp.eventInfo.type">Type</span>
-                        <fa-icon icon="sort"></fa-icon>
-                    </th>
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="name"><span jhiTranslate="personalAccountingApp.eventInfo.name">Name</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="startDate"><span jhiTranslate="personalAccountingApp.eventInfo.startDate">Start Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="endDate"><span jhiTranslate="personalAccountingApp.eventInfo.endDate">End Date</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="amount"><span jhiTranslate="personalAccountingApp.eventInfo.amount">Amount</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="amountType"><span jhiTranslate="personalAccountingApp.eventInfo.amountType">Amount Type</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="iterateInformation"><span jhiTranslate="personalAccountingApp.eventInfo.iterateInformation">Iterate Information</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="colour"><span jhiTranslate="personalAccountingApp.eventInfo.colour">Colour</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="calendarId"><span jhiTranslate="personalAccountingApp.eventInfo.calendar">Calendar</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="typeId"><span jhiTranslate="personalAccountingApp.eventInfo.type">Type</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
-            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']"
-                [infiniteScrollDistance]="0">
+            <tbody infinite-scroll (scrolled)="loadPage(page + 1)" [infiniteScrollDisabled]="page >= links['last']" [infiniteScrollDistance]="0">
                 <tr *ngFor="let eventInfo of eventInfos ;trackBy: trackId">
                     <td><a [routerLink]="['/event-info', eventInfo.id, 'view']">{{ eventInfo.id }}</a></td>
                     <td>{{ eventInfo.name }}</td>
                     <td>{{ eventInfo.startDate | date:'mediumDate' }}</td>
                     <td>{{ eventInfo.endDate | date:'mediumDate' }}</td>
                     <td>{{ eventInfo.amount }}</td>
-                    <td jhiTranslate="{{ 'personalAccountingApp.AmountType.' + eventInfo.amountType }}">
-                        {{ eventInfo.amountType }}</td>
-                    <td>
-                        <a *ngIf="eventInfo.iterateInformation"
-                            (click)="openFile(eventInfo.iterateInformationContentType, eventInfo.iterateInformation)"
-                            jhiTranslate="entity.action.open">open</a>
-                        <span *ngIf="eventInfo.iterateInformation">{{ eventInfo.iterateInformationContentType }},
-                            {{ byteSize(eventInfo.iterateInformation) }}</span>
-                    </td>
+                    <td jhiTranslate="{{ 'personalAccountingApp.AmountType.' + eventInfo.amountType }}">{{ eventInfo.amountType }}</td>
+                    <td>{{ eventInfo.iterateInformation }}</td>
                     <td>{{ eventInfo.colour }}</td>
                     <td>
                         <div *ngIf="eventInfo.calendarId">
-                            <a
-                                [routerLink]="['/calendar', eventInfo.calendarId , 'view']">{{ eventInfo.calendarId }}</a>
+                            <a [routerLink]="['/calendar', eventInfo.calendarId , 'view']" >{{ eventInfo.calendarId }}</a>
                         </div>
                     </td>
                     <td>
                         <div *ngIf="eventInfo.typeId">
-                            <a [routerLink]="['/event-info-type', eventInfo.typeId , 'view']">{{ eventInfo.typeId }}</a>
+                            <a [routerLink]="['/event-info-type', eventInfo.typeId , 'view']" >{{ eventInfo.typeId }}</a>
                         </div>
                     </td>
                     <td class="text-right">
                         <div class="btn-group">
-                            <button type="submit" [routerLink]="['/event-info', eventInfo.id, 'view']"
-                                class="btn btn-info btn-sm">
+                            <button type="submit"
+                                    [routerLink]="['/event-info', eventInfo.id, 'view']"
+                                    class="btn btn-info btn-sm">
                                 <fa-icon icon="eye"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
                             </button>
 
-                            <button type="submit" [routerLink]="['/event-info', eventInfo.id, 'edit']"
-                                class="btn btn-primary btn-sm">
+                            <button type="submit"
+                                    [routerLink]="['/event-info', eventInfo.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
                                 <fa-icon icon="pencil-alt"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
                             </button>
 
-                            <button type="submit" (click)="delete(eventInfo)" class="btn btn-danger btn-sm">
+                            <button type="submit" (click)="delete(eventInfo)"
+                                    class="btn btn-danger btn-sm">
                                 <fa-icon icon="times"></fa-icon>
                                 <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
                             </button>

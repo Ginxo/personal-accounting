@@ -30,10 +30,7 @@
                 </dd>
                 <dt><span jhiTranslate="personalAccountingApp.eventInfo.iterateInformation">Iterate Information</span></dt>
                 <dd>
-                    <div *ngIf="eventInfo.iterateInformation">
-                        <a (click)="openFile(eventInfo.iterateInformationContentType!, eventInfo.iterateInformation)" jhiTranslate="entity.action.open">open</a>
-                        {{ eventInfo.iterateInformationContentType }}, {{ byteSize(eventInfo.iterateInformation) }}
-                    </div>
+                    <span>{{ eventInfo.iterateInformation }}</span>
                 </dd>
                 <dt><span jhiTranslate="personalAccountingApp.eventInfo.colour">Colour</span></dt>
                 <dd>

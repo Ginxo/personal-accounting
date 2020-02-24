@@ -17,7 +17,7 @@ entity EventInfo {
     endDate LocalDate required,
     amount BigDecimal required,
     amountType AmountType required,
-    iterateInformation Blob,
+    iterateInformation TextBlob,
     colour String required
 }
 

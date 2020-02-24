@@ -3,6 +3,7 @@ package mingorance.cano.personal.accounting.domain;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -50,11 +51,9 @@ public class EventInfo implements Serializable {
     private AmountType amountType;
 
     @Lob
+    @Type(type = "org.hibernate.type.TextType")
     @Column(name = "iterate_information")
-    private byte[] iterateInformation;
-
-    @Column(name = "iterate_information_content_type")
-    private String iterateInformationContentType;
+    private String iterateInformation;
 
     @NotNull
     @Column(name = "colour", nullable = false)
@@ -144,30 +143,17 @@ public class EventInfo implements Serializable {
         this.amountType = amountType;
     }
 
-    public byte[] getIterateInformation() {
+    public String getIterateInformation() {
         return iterateInformation;
     }
 
-    public EventInfo iterateInformation(byte[] iterateInformation) {
+    public EventInfo iterateInformation(String iterateInformation) {
         this.iterateInformation = iterateInformation;
         return this;
     }
 
-    public void setIterateInformation(byte[] iterateInformation) {
+    public void setIterateInformation(String iterateInformation) {
         this.iterateInformation = iterateInformation;
-    }
-
-    public String getIterateInformationContentType() {
-        return iterateInformationContentType;
-    }
-
-    public EventInfo iterateInformationContentType(String iterateInformationContentType) {
-        this.iterateInformationContentType = iterateInformationContentType;
-        return this;
-    }
-
-    public void setIterateInformationContentType(String iterateInformationContentType) {
-        this.iterateInformationContentType = iterateInformationContentType;
     }
 
     public String getColour() {
@@ -236,7 +222,6 @@ public class EventInfo implements Serializable {
             ", amount=" + getAmount() +
             ", amountType='" + getAmountType() + "'" +
             ", iterateInformation='" + getIterateInformation() + "'" +
-            ", iterateInformationContentType='" + getIterateInformationContentType() + "'" +
             ", colour='" + getColour() + "'" +
             "}";
     }

@@ -30,10 +30,7 @@
             <column name="amount_type" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="iterate_information" type="longblob">
-                <constraints nullable="true" />
-            </column>
-            <column name="iterate_information_content_type" type="varchar(255)">
+            <column name="iterate_information" type="${clobType}">
                 <constraints nullable="true" />
             </column>
             <column name="colour" type="varchar(255)">
@@ -73,8 +70,7 @@
             <column name="end_date" type="date"/>
             <column name="amount" type="numeric"/>
             <column name="amount_type" type="string"/>
-            <column name="iterate_information" type="blob"/>
-            <column name="iterate_information_content_type" type="string"/>
+            <column name="iterate_information" type="clob"/>
             <column name="colour" type="string"/>
             <column name="calendar_id" type="numeric"/>
             <column name="type_id" type="numeric"/>

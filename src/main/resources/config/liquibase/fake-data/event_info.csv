@@ -1,11 +1,11 @@
-id;name;start_date;end_date;amount;amount_type;iterate_information;iterate_information_content_type;colour;calendar_id;type_id
-1;copy parse eyeballs;2020-02-21;2020-02-20;8052;FIX;../fake-data/blob/hipster.png;image/png;Plains Pitcairn Islands Tasty;1;1
-2;bus Investment Account;2020-02-21;2020-02-20;82301;FIX;../fake-data/blob/hipster.png;image/png;Wooden Virginia;2;2
-3;Architect;2020-02-21;2020-02-21;11462;FIX;../fake-data/blob/hipster.png;image/png;Bedfordshire;3;3
-4;Solomon Islands Dollar California South Dakota;2020-02-21;2020-02-20;63007;SUM;../fake-data/blob/hipster.png;image/png;synthesizing Internal Facilitator;4;4
-5;Analyst;2020-02-20;2020-02-20;9736;SUM;../fake-data/blob/hipster.png;image/png;Avon Electronics infrastructure;5;5
-6;Rand;2020-02-20;2020-02-21;53484;SUM;../fake-data/blob/hipster.png;image/png;Markets white Global;6;6
-7;Yuan Renminbi;2020-02-20;2020-02-21;61008;FIX;../fake-data/blob/hipster.png;image/png;invoice;7;7
-8;transmitting;2020-02-21;2020-02-20;45659;FIX;../fake-data/blob/hipster.png;image/png;salmon Sports;8;8
-9;Cotton;2020-02-20;2020-02-21;6033;SUM;../fake-data/blob/hipster.png;image/png;Exclusive;9;9
-10;SAS;2020-02-21;2020-02-20;91023;SUM;../fake-data/blob/hipster.png;image/png;Sports Automotive Cambridgeshire;10;10
+id;name;start_date;end_date;amount;amount_type;iterate_information;colour;calendar_id;type_id
+1;copy parse eyeballs;2020-02-21;2020-02-20;8052;FIX;../fake-data/blob/hipster.txt;Plains Pitcairn Islands Tasty;1;1
+2;bus Investment Account;2020-02-21;2020-02-20;82301;FIX;../fake-data/blob/hipster.txt;Wooden Virginia;2;2
+3;Architect;2020-02-21;2020-02-21;11462;FIX;../fake-data/blob/hipster.txt;Bedfordshire;3;3
+4;Solomon Islands Dollar California South Dakota;2020-02-21;2020-02-20;63007;SUM;../fake-data/blob/hipster.txt;synthesizing Internal Facilitator;4;4
+5;Analyst;2020-02-20;2020-02-20;9736;SUM;../fake-data/blob/hipster.txt;Avon Electronics infrastructure;5;5
+6;Rand;2020-02-20;2020-02-21;53484;SUM;../fake-data/blob/hipster.txt;Markets white Global;6;6
+7;Yuan Renminbi;2020-02-20;2020-02-21;61008;FIX;../fake-data/blob/hipster.txt;invoice;7;7
+8;transmitting;2020-02-21;2020-02-20;45659;FIX;../fake-data/blob/hipster.txt;salmon Sports;8;8
+9;Cotton;2020-02-20;2020-02-21;6033;SUM;../fake-data/blob/hipster.txt;Exclusive;9;9
+10;SAS;2020-02-21;2020-02-20;91023;SUM;../fake-data/blob/hipster.txt;Sports Automotive Cambridgeshire;10;10

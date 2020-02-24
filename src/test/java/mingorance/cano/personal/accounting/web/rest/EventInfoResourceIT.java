@@ -63,10 +63,8 @@ public class EventInfoResourceIT {
     private static final AmountType DEFAULT_AMOUNT_TYPE = AmountType.SUM;
     private static final AmountType UPDATED_AMOUNT_TYPE = AmountType.FIX;
 
-    private static final byte[] DEFAULT_ITERATE_INFORMATION = TestUtil.createByteArray(1, "0");
-    private static final byte[] UPDATED_ITERATE_INFORMATION = TestUtil.createByteArray(1, "1");
-    private static final String DEFAULT_ITERATE_INFORMATION_CONTENT_TYPE = "image/jpg";
-    private static final String UPDATED_ITERATE_INFORMATION_CONTENT_TYPE = "image/png";
+    private static final String DEFAULT_ITERATE_INFORMATION = "AAAAAAAAAA";
+    private static final String UPDATED_ITERATE_INFORMATION = "BBBBBBBBBB";
 
     private static final String DEFAULT_COLOUR = "AAAAAAAAAA";
     private static final String UPDATED_COLOUR = "BBBBBBBBBB";
@@ -128,7 +126,6 @@ public class EventInfoResourceIT {
             .amount(DEFAULT_AMOUNT)
             .amountType(DEFAULT_AMOUNT_TYPE)
             .iterateInformation(DEFAULT_ITERATE_INFORMATION)
-            .iterateInformationContentType(DEFAULT_ITERATE_INFORMATION_CONTENT_TYPE)
             .colour(DEFAULT_COLOUR);
         // Add required entity
         Calendar calendar;
@@ -166,7 +163,6 @@ public class EventInfoResourceIT {
             .amount(UPDATED_AMOUNT)
             .amountType(UPDATED_AMOUNT_TYPE)
             .iterateInformation(UPDATED_ITERATE_INFORMATION)
-            .iterateInformationContentType(UPDATED_ITERATE_INFORMATION_CONTENT_TYPE)
             .colour(UPDATED_COLOUR);
         // Add required entity
         Calendar calendar;
@@ -218,7 +214,6 @@ public class EventInfoResourceIT {
         assertThat(testEventInfo.getAmount()).isEqualTo(DEFAULT_AMOUNT);
         assertThat(testEventInfo.getAmountType()).isEqualTo(DEFAULT_AMOUNT_TYPE);
         assertThat(testEventInfo.getIterateInformation()).isEqualTo(DEFAULT_ITERATE_INFORMATION);
-        assertThat(testEventInfo.getIterateInformationContentType()).isEqualTo(DEFAULT_ITERATE_INFORMATION_CONTENT_TYPE);
         assertThat(testEventInfo.getColour()).isEqualTo(DEFAULT_COLOUR);
     }
 
@@ -373,8 +368,7 @@ public class EventInfoResourceIT {
             .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
             .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].amountType").value(hasItem(DEFAULT_AMOUNT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].iterateInformationContentType").value(hasItem(DEFAULT_ITERATE_INFORMATION_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].iterateInformation").value(hasItem(Base64Utils.encodeToString(DEFAULT_ITERATE_INFORMATION))))
+            .andExpect(jsonPath("$.[*].iterateInformation").value(hasItem(DEFAULT_ITERATE_INFORMATION.toString())))
             .andExpect(jsonPath("$.[*].colour").value(hasItem(DEFAULT_COLOUR)));
     }
     
@@ -394,8 +388,7 @@ public class EventInfoResourceIT {
             .andExpect(jsonPath("$.endDate").value(DEFAULT_END_DATE.toString()))
             .andExpect(jsonPath("$.amount").value(DEFAULT_AMOUNT.intValue()))
             .andExpect(jsonPath("$.amountType").value(DEFAULT_AMOUNT_TYPE.toString()))
-            .andExpect(jsonPath("$.iterateInformationContentType").value(DEFAULT_ITERATE_INFORMATION_CONTENT_TYPE))
-            .andExpect(jsonPath("$.iterateInformation").value(Base64Utils.encodeToString(DEFAULT_ITERATE_INFORMATION)))
+            .andExpect(jsonPath("$.iterateInformation").value(DEFAULT_ITERATE_INFORMATION.toString()))
             .andExpect(jsonPath("$.colour").value(DEFAULT_COLOUR));
     }
 
@@ -986,8 +979,7 @@ public class EventInfoResourceIT {
             .andExpect(jsonPath("$.[*].endDate").value(hasItem(DEFAULT_END_DATE.toString())))
             .andExpect(jsonPath("$.[*].amount").value(hasItem(DEFAULT_AMOUNT.intValue())))
             .andExpect(jsonPath("$.[*].amountType").value(hasItem(DEFAULT_AMOUNT_TYPE.toString())))
-            .andExpect(jsonPath("$.[*].iterateInformationContentType").value(hasItem(DEFAULT_ITERATE_INFORMATION_CONTENT_TYPE)))
-            .andExpect(jsonPath("$.[*].iterateInformation").value(hasItem(Base64Utils.encodeToString(DEFAULT_ITERATE_INFORMATION))))
+            .andExpect(jsonPath("$.[*].iterateInformation").value(hasItem(DEFAULT_ITERATE_INFORMATION.toString())))
             .andExpect(jsonPath("$.[*].colour").value(hasItem(DEFAULT_COLOUR)));
 
         // Check, that the count call also returns 1
@@ -1042,7 +1034,6 @@ public class EventInfoResourceIT {
             .amount(UPDATED_AMOUNT)
             .amountType(UPDATED_AMOUNT_TYPE)
             .iterateInformation(UPDATED_ITERATE_INFORMATION)
-            .iterateInformationContentType(UPDATED_ITERATE_INFORMATION_CONTENT_TYPE)
             .colour(UPDATED_COLOUR);
         EventInfoDTO eventInfoDTO = eventInfoMapper.toDto(updatedEventInfo);
 
@@ -1061,7 +1052,6 @@ public class EventInfoResourceIT {
         assertThat(testEventInfo.getAmount()).isEqualTo(UPDATED_AMOUNT);
         assertThat(testEventInfo.getAmountType()).isEqualTo(UPDATED_AMOUNT_TYPE);
         assertThat(testEventInfo.getIterateInformation()).isEqualTo(UPDATED_ITERATE_INFORMATION);
-        assertThat(testEventInfo.getIterateInformationContentType()).isEqualTo(UPDATED_ITERATE_INFORMATION_CONTENT_TYPE);
         assertThat(testEventInfo.getColour()).isEqualTo(UPDATED_COLOUR);
     }
 

@@ -87,21 +87,8 @@
 
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="personalAccountingApp.eventInfo.iterateInformation" for="field_iterateInformation">Iterate Information</label>
-                    <div>
-                        <div *ngIf="editForm.get('iterateInformation')!.value" class="form-text text-danger clearfix">
-                            <a class="pull-left" (click)="openFile(editForm.get('iterateInformationContentType')!.value, editForm.get('iterateInformation')!.value)" jhiTranslate="entity.action.open">open</a><br>
-                            <span class="pull-left">{{ editForm.get('iterateInformationContentType')!.value }}, {{ byteSize(editForm.get('iterateInformation')!.value) }}</span>
-                            <button type="button" (click)="editForm.patchValue({iterateInformation: null});editForm.patchValue({iterateInformationContentType: null});"
-                                    class="btn btn-secondary btn-xs pull-right">
-                                <fa-icon icon="times"></fa-icon>
-                            </button>
-                        </div>
-                        <input type="file" id="file_iterateInformation" (change)="setFileData($event, 'iterateInformation', false)" jhiTranslate="entity.action.addblob"/>
-                    </div>
-                    <input type="hidden" class="form-control" name="iterateInformation" id="field_iterateInformation"
-                           formControlName="iterateInformation"/>
-                    <input type="hidden" class="form-control" name="iterateInformationContentType" id="field_iterateInformationContentType"
-                           formControlName="iterateInformationContentType" />
+                    <textarea class="form-control" name="iterateInformation" id="field_iterateInformation"
+                              formControlName="iterateInformation"></textarea>
                 </div>
 
                 <div class="form-group">

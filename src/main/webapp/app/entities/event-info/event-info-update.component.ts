@@ -35,7 +35,6 @@ export class EventInfoUpdateComponent implements OnInit {
     amount: [null, [Validators.required]],
     amountType: [null, [Validators.required]],
     iterateInformation: [],
-    iterateInformationContentType: [],
     colour: [null, [Validators.required]],
     calendarId: [null, Validators.required],
     typeId: [null, Validators.required]
@@ -70,7 +69,6 @@ export class EventInfoUpdateComponent implements OnInit {
       amount: eventInfo.amount,
       amountType: eventInfo.amountType,
       iterateInformation: eventInfo.iterateInformation,
-      iterateInformationContentType: eventInfo.iterateInformationContentType,
       colour: eventInfo.colour,
       calendarId: eventInfo.calendarId,
       typeId: eventInfo.typeId
@@ -116,7 +114,6 @@ export class EventInfoUpdateComponent implements OnInit {
       endDate: this.editForm.get(['endDate'])!.value,
       amount: this.editForm.get(['amount'])!.value,
       amountType: this.editForm.get(['amountType'])!.value,
-      iterateInformationContentType: this.editForm.get(['iterateInformationContentType'])!.value,
       iterateInformation: this.editForm.get(['iterateInformation'])!.value,
       colour: this.editForm.get(['colour'])!.value,
       calendarId: this.editForm.get(['calendarId'])!.value,

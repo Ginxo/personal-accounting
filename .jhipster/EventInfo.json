@@ -40,7 +40,7 @@
         {
             "fieldName": "iterateInformation",
             "fieldType": "byte[]",
-            "fieldTypeBlobContent": "any"
+            "fieldTypeBlobContent": "text"
         },
         {
             "fieldName": "colour",
