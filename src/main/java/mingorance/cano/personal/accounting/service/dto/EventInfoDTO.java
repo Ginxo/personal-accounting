@@ -1,11 +1,13 @@
 package mingorance.cano.personal.accounting.service.dto;
 
-import java.time.LocalDate;
-import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.Objects;
+
 import javax.persistence.Lob;
+import javax.validation.constraints.NotNull;
+
 import mingorance.cano.personal.accounting.domain.enumeration.AmountType;
 
 /**
@@ -37,6 +39,8 @@ public class EventInfoDTO implements Serializable {
     private Long calendarId;
 
     private Long typeId;
+
+    private EventInfoTypeDTO type;
 
     public Long getId() {
         return id;
@@ -108,6 +112,14 @@ public class EventInfoDTO implements Serializable {
 
     public void setTypeId(Long eventInfoTypeId) {
         this.typeId = eventInfoTypeId;
+    }
+
+    public EventInfoTypeDTO getType() {
+        return type;
+    }
+
+    public void setType(EventInfoTypeDTO type) {
+        this.type = type;
     }
 
     @Override

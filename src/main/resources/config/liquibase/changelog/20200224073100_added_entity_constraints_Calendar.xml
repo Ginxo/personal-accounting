@@ -4,13 +4,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
     <!--
-        Added the constraints for entity EventInfoType.
+        Added the constraints for entity Calendar.
     -->
-    <changeSet id="20200221102200-2" author="jhipster">
+    <changeSet id="20200224073100-2" author="jhipster">
         
         <addForeignKeyConstraint baseColumnNames="user_id"
-                                 baseTableName="event_info_type"
-                                 constraintName="fk_event_info_type_user_id"
+                                 baseTableName="calendar"
+                                 constraintName="fk_calendar_user_id"
                                  referencedColumnNames="id"
                                  referencedTableName="jhi_user"/>
 

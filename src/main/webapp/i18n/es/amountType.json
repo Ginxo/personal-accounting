@@ -2,8 +2,8 @@
   "personalAccountingApp": {
     "AmountType": {
       "null": "",
-      "SUM": "SUM",
-      "FIX": "FIX"
+      "SUM": "Suma",
+      "FIX": "Fijo"
     }
   }
 }

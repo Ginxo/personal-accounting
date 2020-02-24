@@ -26,7 +26,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20200221102200",
+    "changelogDate": "20200224073300",
     "entityTableName": "event_info_type",
     "dto": "mapstruct",
     "pagination": "infinite-scroll",

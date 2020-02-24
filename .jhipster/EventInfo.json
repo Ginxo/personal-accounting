@@ -61,7 +61,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20200221102100",
+    "changelogDate": "20200224073200",
     "entityTableName": "event_info",
     "dto": "mapstruct",
     "pagination": "infinite-scroll",

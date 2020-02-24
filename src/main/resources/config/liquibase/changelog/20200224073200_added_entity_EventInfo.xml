@@ -8,27 +8,42 @@
 
     
     <!--
-        Added the entity EventInfoType.
+        Added the entity EventInfo.
     -->
-    <changeSet id="20200221102200-1" author="jhipster">
-        <createTable tableName="event_info_type">
+    <changeSet id="20200224073200-1" author="jhipster">
+        <createTable tableName="event_info">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
             <column name="name" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="icon" type="varchar(255)">
+            <column name="date" type="date">
                 <constraints nullable="false" />
             </column>
-            <column name="user_id" type="bigint">
+            <column name="amount" type="decimal(21,2)">
+                <constraints nullable="false" />
+            </column>
+            <column name="amount_type" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="iterate_information" type="${clobType}">
+                <constraints nullable="true" />
+            </column>
+            <column name="colour" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="calendar_id" type="bigint">
+                <constraints nullable="false" />
+            </column>
+            <column name="type_id" type="bigint">
                 <constraints nullable="false" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
     </changeSet>
 
-    <changeSet id="20200221102200-1-relations" author="jhipster">
+    <changeSet id="20200224073200-1-relations" author="jhipster">
 
     </changeSet>
     <!-- jhipster-needle-liquibase-add-changeset - JHipster will add changesets here, do not remove-->
@@ -41,15 +56,20 @@
           This can be customized by adding or removing 'faker' in the 'spring.liquibase.contexts'
           Spring Boot configuration key.
     -->
-    <changeSet id="20200221102200-1-data" author="jhipster" context="faker">
+    <changeSet id="20200224073200-1-data" author="jhipster" context="faker">
         <loadData
-                  file="config/liquibase/fake-data/event_info_type.csv"
+                  file="config/liquibase/fake-data/event_info.csv"
                   separator=";"
-                  tableName="event_info_type">
+                  tableName="event_info">
             <column name="id" type="numeric"/>
             <column name="name" type="string"/>
-            <column name="icon" type="string"/>
-            <column name="user_id" type="numeric"/>
+            <column name="date" type="date"/>
+            <column name="amount" type="numeric"/>
+            <column name="amount_type" type="string"/>
+            <column name="iterate_information" type="clob"/>
+            <column name="colour" type="string"/>
+            <column name="calendar_id" type="numeric"/>
+            <column name="type_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

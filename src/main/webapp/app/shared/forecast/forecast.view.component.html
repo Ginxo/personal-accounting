@@ -15,14 +15,13 @@
   </div>
 </form>
 <div class="table-responsive" id="entities" *ngIf="forecasts$ | async ; let forecasts">
-  <table class="table table-striped" aria-describedby="page-heading">
+  <table class="table" aria-describedby="page-heading">
     <thead>
       <tr>
+        <th scope="col">#</th>
         <th scope="col"><span jhiTranslate="personalAccountingApp.eventInfo.name">Name</span>
         </th>
         <th scope="col"><span jhiTranslate="personalAccountingApp.forecast.date">Date</span>
-        </th>
-        <th scope="col"><span jhiTranslate="personalAccountingApp.forecast.amount">Amount</span>
         </th>
         <th scope="col"><span jhiTranslate="personalAccountingApp.eventInfo.amountType">Amount
             Type</span>
@@ -30,26 +29,20 @@
         <th scope="col"><span jhiTranslate="personalAccountingApp.forecast.totalAmount">Total
             Amount</span>
         </th>
-        <th scope="col"><span jhiTranslate="personalAccountingApp.forecast.amountDifference">Amount Difference</span>
-        </th>
-        <th scope="col"><span jhiTranslate="personalAccountingApp.forecast.colour">Colour</span>
-        </th>
-        <th scope="col"><span jhiTranslate="personalAccountingApp.forecast.icon">Icon</span>
-        </th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let forecast of forecasts;">
+        <td>
+          <fa-icon icon="{{ forecast.icon }}"></fa-icon>
+          <fa-icon icon="square" [ngStyle]="{'color': forecast.colour}"></fa-icon>
+        </td>
         <td>{{ forecast.name }}</td>
         <td>{{ forecast.date | date:'mediumDate' }}</td>
-        <td>{{ forecast.amount | currency:'EUR':'symbol' }}</td>
         <td jhiTranslate="{{ 'personalAccountingApp.AmountType.' + forecast.eventInfo.amountType }}">
           {{ forecast.amountType }}
         </td>
-        <td>{{ forecast.totalAmount | currency:'EUR':'symbol' }}</td>
-        <td>{{ forecast.amountDifference | currency:'EUR':'symbol' }}</td>
-        <td>{{ forecast.eventInfo.colour }}</td>
-        <td>{{ forecast.icon }}</td>
+        <td><span class="amount">{{ forecast.totalAmount | currency:'EUR':'symbol' }}</span> (<span class="amountDifference">{{ forecast.amountDifference | currency:'EUR':'symbol' }}</span> <fa-icon *ngIf="forecast.amountDifference > 0" icon="long-arrow-alt-up" [ngStyle]="{'color': '#28de28'}"></fa-icon><fa-icon *ngIf="forecast.amountDifference < 0" icon="long-arrow-alt-down" [ngStyle]="{'color': '#de2828'}"></fa-icon>)</span></td>
       </tr>
     </tbody>
   </table>

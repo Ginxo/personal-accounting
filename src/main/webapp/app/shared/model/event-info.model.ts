@@ -1,5 +1,6 @@
 import { Moment } from 'moment';
 import { AmountType } from 'app/shared/model/enumerations/amount-type.model';
+import { IEventInfoType } from './event-info-type.model';
 
 export interface IEventInfo {
   id?: number;
@@ -11,6 +12,7 @@ export interface IEventInfo {
   colour?: string;
   calendarId?: number;
   typeId?: number;
+  type?: IEventInfoType;
 }
 
 export class EventInfo implements IEventInfo {
@@ -23,6 +25,7 @@ export class EventInfo implements IEventInfo {
     public iterateInformation?: any,
     public colour?: string,
     public calendarId?: number,
-    public typeId?: number
+    public typeId?: number,
+    public type?: IEventInfoType
   ) {}
 }

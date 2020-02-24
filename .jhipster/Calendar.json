@@ -44,7 +44,7 @@
             "otherEntityField": "id"
         }
     ],
-    "changelogDate": "20200221102000",
+    "changelogDate": "20200224073100",
     "entityTableName": "calendar",
     "dto": "mapstruct",
     "pagination": "infinite-scroll",

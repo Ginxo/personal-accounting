@@ -10,10 +10,12 @@ import { AmountType } from '../model/enumerations/amount-type.model';
 import { IEventInfo } from '../model/event-info.model';
 import { ForecastInfo, IForecastInfo } from '../model/forecast-info.model';
 import { DATE_FORMAT } from '../constants/input.constants';
+import { EventInfoTypeService } from 'app/entities/event-info-type/event-info-type.service';
 
 @Component({
   selector: 'jhi-forecast-view',
-  templateUrl: './forecast.view.component.html'
+  templateUrl: './forecast.view.component.html',
+  styleUrls: ['./forecast.view.component.scss']
 })
 export class ForecastViewComponent implements OnInit {
   @Input()
@@ -29,7 +31,7 @@ export class ForecastViewComponent implements OnInit {
     ]
   });
 
-  constructor(private eventInfoService: EventInfoService, private fb: FormBuilder) {}
+  constructor(private eventInfoService: EventInfoService, private eventInfoTypeService: EventInfoTypeService, private fb: FormBuilder) {}
 
   ngOnInit(): void {
     this.executeForecast();
@@ -72,7 +74,7 @@ export class ForecastViewComponent implements OnInit {
     foreCastInfo.amountDifference = newTotalAmount - totalAmount;
     foreCastInfo.colour = event.colour;
     foreCastInfo.date = event.date;
-    foreCastInfo.icon = ''; // TODO:
+    foreCastInfo.icon = event.type !== undefined ? event.type.icon : '';
     foreCastInfo.eventInfo = event;
     return foreCastInfo;
   }
