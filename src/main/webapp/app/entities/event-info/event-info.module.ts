@@ -7,9 +7,10 @@ import { EventInfoDetailComponent } from './event-info-detail.component';
 import { EventInfoUpdateComponent } from './event-info-update.component';
 import { EventInfoDeleteDialogComponent } from './event-info-delete-dialog.component';
 import { eventInfoRoute } from './event-info.route';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
-  imports: [PersonalAccountingSharedModule, RouterModule.forChild(eventInfoRoute)],
+  imports: [PersonalAccountingSharedModule, RouterModule.forChild(eventInfoRoute), ColorPickerModule],
   declarations: [EventInfoComponent, EventInfoDetailComponent, EventInfoUpdateComponent, EventInfoDeleteDialogComponent],
   entryComponents: [EventInfoDeleteDialogComponent]
 })

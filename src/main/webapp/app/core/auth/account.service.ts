@@ -10,6 +10,7 @@ import { StateStorageService } from 'app/core/auth/state-storage.service';
 import { SERVER_API_URL } from 'app/app.constants';
 import { Account } from 'app/core/user/account.model';
 import { TrackerService } from '../tracker/tracker.service';
+import { ICalendar } from 'app/shared/model/calendar.model';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
@@ -90,6 +91,16 @@ export class AccountService {
 
   private fetch(): Observable<Account> {
     return this.http.get<Account>(SERVER_API_URL + 'api/account');
+  }
+
+  public setSelectedCalendar(calendar: ICalendar | null): void {
+    if (this.userIdentity !== null) {
+      this.userIdentity.selectedCalendar = calendar;
+    }
+  }
+
+  public getSelectedCalendar(): ICalendar | null {
+    return this.userIdentity !== null ? this.userIdentity.selectedCalendar : null;
   }
 
   private navigateToStoredUrl(): void {

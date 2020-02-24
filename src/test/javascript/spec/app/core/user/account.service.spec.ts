@@ -13,9 +13,11 @@ import { TrackerService } from 'app/core/tracker/tracker.service';
 import { MockTrackerService } from '../../../helpers/mock-tracker.service';
 import { MockRouter } from '../../../helpers/mock-route.service';
 import { MockStateStorageService } from '../../../helpers/mock-state-storage.service';
+import { Calendar } from 'app/shared/model/calendar.model';
 
 function accountWithAuthorities(authorities: string[]): Account {
   return {
+    id: 1,
     activated: true,
     authorities,
     email: '',
@@ -23,7 +25,8 @@ function accountWithAuthorities(authorities: string[]): Account {
     langKey: '',
     lastName: '',
     login: '',
-    imageUrl: ''
+    imageUrl: '',
+    selectedCalendar: new Calendar()
   };
 }
 

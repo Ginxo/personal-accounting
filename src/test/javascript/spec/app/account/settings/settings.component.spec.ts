@@ -7,6 +7,7 @@ import { AccountService } from 'app/core/auth/account.service';
 import { Account } from 'app/core/user/account.model';
 import { SettingsComponent } from 'app/account/settings/settings.component';
 import { MockAccountService } from '../../../helpers/mock-account.service';
+import { Calendar } from 'app/shared/model/calendar.model';
 
 describe('Component Tests', () => {
   describe('SettingsComponent', () => {
@@ -14,6 +15,7 @@ describe('Component Tests', () => {
     let fixture: ComponentFixture<SettingsComponent>;
     let mockAuth: MockAccountService;
     const accountValues: Account = {
+      id: 1,
       firstName: 'John',
       lastName: 'Doe',
       activated: true,
@@ -21,7 +23,8 @@ describe('Component Tests', () => {
       langKey: 'es',
       login: 'john',
       authorities: [],
-      imageUrl: ''
+      imageUrl: '',
+      selectedCalendar: new Calendar()
     };
 
     beforeEach(async(() => {

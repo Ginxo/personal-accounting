@@ -1,18 +1,18 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { JhiDataUtils, JhiFileLoadError, JhiEventManager, JhiEventWithContent } from 'ng-jhipster';
-
-import { IEventInfo, EventInfo } from 'app/shared/model/event-info.model';
-import { EventInfoService } from './event-info.service';
+import { AccountService } from 'app/core/auth/account.service';
+import { CalendarService } from 'app/entities/calendar/calendar.service';
+import { EventInfoTypeService } from 'app/entities/event-info-type/event-info-type.service';
 import { AlertError } from 'app/shared/alert/alert-error.model';
 import { ICalendar } from 'app/shared/model/calendar.model';
-import { CalendarService } from 'app/entities/calendar/calendar.service';
 import { IEventInfoType } from 'app/shared/model/event-info-type.model';
-import { EventInfoTypeService } from 'app/entities/event-info-type/event-info-type.service';
+import { EventInfo, IEventInfo } from 'app/shared/model/event-info.model';
+import { JhiDataUtils, JhiEventManager, JhiEventWithContent, JhiFileLoadError } from 'ng-jhipster';
+import { Observable } from 'rxjs';
+import { EventInfoService } from './event-info.service';
 
 type SelectableEntity = ICalendar | IEventInfoType;
 
@@ -44,6 +44,7 @@ export class EventInfoUpdateComponent implements OnInit {
     protected eventInfoService: EventInfoService,
     protected calendarService: CalendarService,
     protected eventInfoTypeService: EventInfoTypeService,
+    protected accountService: AccountService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -51,9 +52,13 @@ export class EventInfoUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ eventInfo }) => {
       this.updateForm(eventInfo);
-
-      this.calendarService.query().subscribe((res: HttpResponse<ICalendar[]>) => (this.calendars = res.body || []));
-
+      this.accountService
+        .identity()
+        .subscribe(account =>
+          this.calendarService
+            .query({ 'userId.equals': account !== null ? account.id : '' })
+            .subscribe((res: HttpResponse<ICalendar[]>) => (this.calendars = res.body || []))
+        );
       this.eventInfoTypeService.query().subscribe((res: HttpResponse<IEventInfoType[]>) => (this.eventinfotypes = res.body || []));
     });
   }

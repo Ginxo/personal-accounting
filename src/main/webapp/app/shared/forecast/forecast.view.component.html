@@ -1,14 +1,37 @@
 <form class="form" role="form" (ngSubmit)="executeForecast()" [formGroup]="filterForm">
   <div class="row pb-2">
-    <div class="col-md-4">
-      <label for="fromDate" jhiTranslate="personalAccountingApp.forecast.form.filter.from">From</label>
-      <input type="date" class="form-control" name="fromDate" id="fromDate" formControlName="fromDate" #fromDate
-        required />
+    <div class="col-md-4 form-group">
+        <label class="form-control-label" jhiTranslate="personalAccountingApp.forecast.form.filter.from" for="fromDate">From Date</label>
+        <div class="input-group">
+            <input id="fromDate" type="text" class="form-control" name="fromDate" ngbDatepicker #fromDate="ngbDatepicker" formControlName="fromDate"/>
+            <span class="input-group-append">
+                <button type="button" class="btn btn-secondary" (click)="fromDate.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+        </div>
+        <div *ngIf="filterForm.get('fromDate')!.invalid && (filterForm.get('fromDate')!.dirty || filterForm.get('fromDate')!.touched)">
+            <small class="form-text text-danger"
+                   *ngIf="filterForm.get('fromDate')?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+            </small>
+        </div>
     </div>
-    <div class="col-md-4">
-      <label for="toDate" jhiTranslate="personalAccountingApp.forecast.form.filter.to">To</label>
-      <input type="date" class="form-control" name="toDate" id="toDate" formControlName="toDate" #toDate required />
+
+    <div class="col-md-4 form-group">
+        <label class="form-control-label" jhiTranslate="personalAccountingApp.forecast.form.filter.to" for="toDate">To Date</label>
+        <div class="input-group">
+            <input id="toDate" type="text" class="form-control" name="toDate" ngbDatepicker #toDate="ngbDatepicker" formControlName="toDate"/>
+            <span class="input-group-append">
+                <button type="button" class="btn btn-secondary" (click)="toDate.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+            </span>
+        </div>
+        <div *ngIf="filterForm.get('toDate')!.invalid && (filterForm.get('toDate')!.dirty || filterForm.get('toDate')!.touched)">
+            <small class="form-text text-danger"
+                   *ngIf="filterForm.get('toDate')?.errors?.required" jhiTranslate="entity.validation.required">
+            This field is required.
+            </small>
+        </div>
     </div>
+
     <div class="col-md-4">
       <button type="submit" class="btn btn-primary" jhiTranslate="entity.action.filter">Filter</button>
     </div>
