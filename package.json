@@ -25,7 +25,7 @@
     "@rschedule/standard-date-adapter": "^1.0.2",
     "bootstrap": "4.4.1",
     "core-js": "3.5.0",
-    "moment": "2.24.0",
+    "moment": "2.29.2",
     "ng-jhipster": "0.11.5",
     "ngx-color-picker": "^9.0.0",
     "ngx-cookie": "4.0.2",
